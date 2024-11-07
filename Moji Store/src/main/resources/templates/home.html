@@ -1,91 +1,273 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7hFIGURE - Anime Figures Store</title>
-    <link rel="stylesheet" href="/css/home.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .stick-top{
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+        }
+        .navbar-brand img {
+            max-height: 40px;
+
+        }
+        .navbar {
+            background: linear-gradient(90deg, rgb(227, 128, 186), rgb(240, 193, 131));
+            transition: background 0.2s ease;
+        }
+        .navbar:hover {
+            background: linear-gradient(90deg, rgb(240, 193, 131),rgb(227, 128, 186));
+        }
+        .hero {
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+            color: #fff;
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+        }
+        .navbar-brand{
+            font-family: 'Cinzel', serif;
+            font-size: 25px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 30px;
+        }
+        .product-card {
+            background-color: #e2b9c3;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card .card-body {
+            padding: 20px;
+        }
+        .btn-primary{
+            background-color: #b66060;
+
+        }
+        .d-flex{
+            width: 350px;
+        }
+        .btn-secondary{
+            background-color:#b66060;
+        }
+        .container_search {
+            max-width: 1200px;
+            padding: 15px;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-actions a {
+            color: rgb(61, 59, 59);
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        .countdown {
+            font-size: 20px;
+            color: #f15b39;
+            padding-bottom: 20px;
+        }
+        footer {
+            background-color: rgb(240, 193, 131);
+            color: rgb(255, 255, 255);
+            padding: 20px 0;
+        }
+        .mt-5 {
+            background: linear-gradient(90deg, rgb(227, 128, 186), rgb(240, 193, 131));
+            transition: background 0.2s ease;
+        }
+        .mt-5:hover {
+            background: linear-gradient(90deg, rgb(240, 193, 131),rgb(227, 128, 186));
+        }
+        .footer-links a {
+            color: #665252;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
 </head>
 <body>
-<header class="header">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow stick-top">
     <div class="container">
-        <div class="top-bar">
-            <div class="logo">7hFIGURE</div>
-            <div class="search-bar">
-                <input type="text" placeholder="Bạn đang tìm gì...">
+        <a class="navbar-brand" href="#">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDv02IdyrSw4FEmtTrHItgia3GUVxa0xyHzw&s" alt="FIGUREONe">FIGUREONe
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PVC Figures</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">RESIN Figures</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Gundam</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pre Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="container">
+        <div class="container_search">
+            <div class="top-bar">
+                <form class="d-flex" action="student-servlet" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Bạn đang tìm gì...">
+                        <button type="submit" class="btn btn-secondary"><i class="bi-search"></i></button>
+                    </div>
+                </form>
+                <div class="user-actions">
+                    <a href="#">Log in</a>
+                    <a href="#">Sign up</a>
+                </div>
+
             </div>
-            <div class="user-actions">
-                <a href="#">Đăng nhập</a>
-                <a href="#">Đăng ký</a>
-                <a href="#">Giỏ hàng (0)</a>
+        </div>
+        <main class="content">
+            <div id="carouselAutoplaying" class="carousel slide carousel-dark mt-3 mb-3" data-bs-ride="carousel">
+                <div class="carousel-inner" style="height:auto;" >
+                    <div class="carousel-item active">
+                        <img src="https://file.hstatic.net/200000462939/file/2__1___1___1__93e4a132748647e6a3ff58b3fa64038a.png" class="d-block w-100" alt="">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://file.hstatic.net/200000462939/file/order.jpg" class="d-block w-100" alt="">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="container text-center mts-5">
+        <h2 class="mb-4">FLASH SALE TODAY</h2>
+        <div class="countdown" id="countdown"></div>
+    </div>
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="https://khomohinh.com/wp-content/uploads/2022/09/mo-hinh-ace-hoa-quyen-25cm-anime-one-piece-4.jpg.webp" alt="Product 1">
+            <div class="card-body">
+                <h5 class="card-title">Mô hình Ace hỏa quyền 25cm anime One Piece</h5>
+                <p class="card-text">450.000 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://khomohinh.com/wp-content/uploads/2023/07/mo-hinh-zoro-burning-torch-diem-vuong-gia-re-14.jpg" alt="Product 2">
+            <div class="card-body">
+                <h5 class="card-title">Mô hình Zoro Burning Torch 30cm giá rẻ</h5>
+                <p class="card-text">480.000 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://khomohinh.com/wp-content/uploads/2023/07/mo-hinh-zoro-tam-long-haki-35cm-gia-re-cuc-dep-3.jpg.webp" alt="Product 3">
+            <div class="card-body">
+                <h5 class="card-title">Mô hình Zoro Tam Long Haki 35cm giá rẻ cực đẹp</h5>
+                <p class="card-text">850.000 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://khomohinh.com/wp-content/uploads/2022/09/mo-hinh-boa-hancock-tu-the-chien-dau-20cm-pvc-one-piece-1.jpg.webp" alt="Product 4">
+            <div class="card-body">
+                <h5 class="card-title">Mô hình Boa Hancock 20cm PVC One Piece</h5>
+                <p class="card-text">135.000 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rbkg-loy94o61qqr779@resize_w450_nl.webp" alt="Product 5">
+            <div class="card-body">
+                <h5 class="card-title">Mô Hình Nhân Vật Nữ anime Handmade Cao Cấp</h5>
+                <p class="card-text">978.317 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
             </div>
         </div>
     </div>
-</header>
-
-
-<div class="container main-content">
-    <aside class="sidebar">
-        <h3>MENU</h3>
-        <ul>
-            <li><a th:href="@{/display-all-product}">New Products</a></li>
-            <li><a href="#">PVC Figures</a></li>
-            <li><a href="#">RESIN Figures</a></li>
-            <li><a href="#">Gundam</a></li>
-            <li><a href="#">Pre Order</a></li>
-        </ul>
-    </aside>
-
-    <main class="content">
-        <!--        carosual-->
-        <div id="carouselAutoplaying" class="carousel slide carousel-dark mt-3 mb-3" data-bs-ride="carousel">
-            <div class="carousel-inner" style="height:auto;" >
-                <!--            <div class="carousel-inner">-->
-                <div class="carousel-item active">
-                    <img src="https://file.hstatic.net/200000462939/file/2__1___1___1__93e4a132748647e6a3ff58b3fa64038a.png" class="d-block w-100" alt="">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://file.hstatic.net/200000462939/file/order.jpg" class="d-block w-100" alt="">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselAutoplaying" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselAutoplaying" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
-        </div>
-    </main>
-</div>
-<!-- Danh sách sản phẩm -->
-<div class="product-grid">
-    <!-- Vòng lặp sản phẩm -->
-    <div th:each="p : ${list}" class="product-card">
-        <div class="product-image">
-            <!-- Ảnh đại diện sản phẩm -->
-            <img th:src="${p.image}" alt="Product Image" />
-        </div>
-        <div class="product-info">
-            <h3 class="product-title" th:text="${p.name}">Tên Sản Phẩm</h3>
-            <div class="product-price">
-                <span th:text="${p.price} + 'đ'">Giá</span>
-            </div>
-            <div class="discount-badge" th:text="${p.description}"></div> <!-- Nếu có giảm giá -->
-            <button class="favorite-button">♡</button>
-        </div>
-    </div>
 </div>
 
+<script>
+    const countdownDate = new Date().getTime() + (1 * 60 * 60 * 1000); // 1 giờ
+    const x = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
 
 
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "Sale đã kết thúc!";
+        }
+    }, 1000);
+</script>
 
-
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+<footer class="text-center mt-5">
+    <div class="container">
+        <h5>Thông Tin Liên Hệ</h5>
+        <p>Địa chỉ: Ba em Nhà Coder</p>
+        <p>Số điện thoại: <a href="tel:+1234567890">Liên hệ anh Viet</a></p>
+        <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+        <div class="footer-links">
+            <a href="#">Chính sách bảo mật</a> |
+            <a href="#">Điều khoản sử dụng</a>
+        </div>
+    </div>
+</footer>
 </html>
