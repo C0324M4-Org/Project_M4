@@ -1,19 +1,23 @@
 package com.example.moji_store.model;
-
 import jakarta.persistence.*;
-
 import java.util.List;
+
 @Entity
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
     @OneToMany(mappedBy = "category")
-    List<Product> products;
+    private List<Product> products;
+
     public Category() {
+    }
+
+    public Category(String name, List<Product> products){
+        this.name = name;
+        this.products = products;
     }
 
     public Long getId() {

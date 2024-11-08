@@ -1,5 +1,4 @@
 package com.example.moji_store.model;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -12,10 +11,10 @@ public class Product {
     private int price;
     private String image;
 
-
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     Category category;
+
     public Product() {
     }
 
