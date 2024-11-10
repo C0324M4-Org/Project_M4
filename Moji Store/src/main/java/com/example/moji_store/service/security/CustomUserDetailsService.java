@@ -21,14 +21,29 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-        Account user = accountRepository.findByEmail(usernameOrEmail);
-        if (user == null) {
-            throw new UsernameNotFoundException("Invalid email or password");
+        Account user;
+
+        // Kiểm tra nếu nhập vào có @
+        if (usernameOrEmail.contains("@")) {
+            // Nếu là email, tìm theo email
+            user = accountRepository.findByEmail(usernameOrEmail);
+        } else {
+            // Nếu không phải email, tìm theo username
+            user = accountRepository.findByUsername(usernameOrEmail);
         }
+
+        // Nếu không tìm thấy người dùng
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid email or username");
+        }
+
+        // Lấy quyền của người dùng
         List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
 
-        return new User(user.getEmail(), user.getPassword(), authorities);
+        // Trả về đối tượng User, với email nếu là email, hoặc username nếu là username
+        return new User(user.getUsername(), user.getPassword(), authorities);
     }
+
 }

@@ -33,36 +33,35 @@ public class SpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/css/**", "/js/**").permitAll() // Các đường dẫn không cần login
-                        .requestMatchers("/admin/**").hasRole("ADMIN") // Yêu cầu role ADMIN
-                        .requestMatchers("/user/**").hasRole("USER") // Yêu cầu Role USER
-                        .anyRequest().authenticated()
+                        .requestMatchers("/", "/login", "/css/**", "/js/**", "/img/**").permitAll()  // Đảm bảo các đường dẫn này có thể truy cập mà không cần đăng nhập
+                        .requestMatchers("/admin/**").hasRole("ADMIN")  // Yêu cầu role ADMIN
+                        .requestMatchers("/user/**").hasRole("USER")  // Yêu cầu Role USER
+                        .anyRequest().authenticated()  // Các yêu cầu còn lại phải được xác thực
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/perform_login")
-                        .successHandler(customAuthenticationSuccessHandler)
-                        .permitAll()
+                        .loginPage("/login")  // Trang login tùy chỉnh
+                        .loginProcessingUrl("/perform_login")  // Đường dẫn xử lý đăng nhập
+                        .successHandler(customAuthenticationSuccessHandler)  // Xử lý thành công đăng nhập
+                        .permitAll()  // Cho phép tất cả người dùng truy cập trang đăng nhập
                 )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/login")
-                        .deleteCookies("JSESSIONID")
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .permitAll()
+                        .logoutSuccessUrl("/login")  // Trang khi logout thành công
+                        .deleteCookies("JSESSIONID")  // Xóa cookie sau khi đăng xuất
+                        .invalidateHttpSession(true)  // Hủy phiên đăng nhập
+                        .clearAuthentication(true)  // Xóa thông tin xác thực
+                        .permitAll()  // Cho phép tất cả người dùng thực hiện logout
                 )
                 .sessionManagement(session -> session
-                        .invalidSessionUrl("/login")
-                        .maximumSessions(1)
-                        .expiredUrl("/login")
+                        .invalidSessionUrl("/login")  // Định hướng đến trang đăng nhập nếu phiên bị hỏng
+                        .maximumSessions(1)  // Số lượng phiên tối đa
+                        .expiredUrl("/login")  // Trang khi phiên hết hạn
                 )
                 .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)  // Xử lý khi không có quyền truy cập
                 )
-                // Tắt hoàn toàn RequestCache phuc vụ việc redirect về trang cố ý truy cập trước khi đăng nhập
-                .requestCache(RequestCacheConfigurer::disable
-                );
+                .requestCache(RequestCacheConfigurer::disable)  // Tắt RequestCache để tránh redirect lại trang trước khi đăng nhập
+        ;
 
         return http.build();
     }

@@ -33,6 +33,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         //them admin
         if (accountRepository.findByEmail("admin@gmail.com") == null) {
             Account admin = new Account();
+            admin.setUsername("admin");
             admin.setEmail("admin@gmail.com");
             // mã hóa mật khẩu
             admin.setPassword(EncryptPasswordUtils.EncryptPasswordUtils("123"));
@@ -46,6 +47,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
         //Them user
         if (accountRepository.findByEmail("user@gmail.com") == null) {
             Account user = new Account();
+            user.setUsername("user");
             user.setEmail("user@gmail.com");
             // mã hóa mật khẩu
             user.setPassword(EncryptPasswordUtils.EncryptPasswordUtils("123"));

@@ -13,6 +13,8 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, unique = true)
+    private String username;
+    @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
     private String password;
@@ -24,7 +26,8 @@ public class Account {
     )
     private List<Role> roles = new ArrayList<>();
 
-    public Account(String email, String password, List<Role> roles) {
+    public Account(String username, String email, String password, List<Role> roles) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
@@ -63,5 +66,13 @@ public class Account {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
