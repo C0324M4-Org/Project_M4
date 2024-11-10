@@ -34,7 +34,7 @@ public class CategoryService implements ICategoryService {
     }
 
 
-    public class CannotDeleteCategoryException extends RuntimeException {
+    public static class CannotDeleteCategoryException extends RuntimeException {
         public CannotDeleteCategoryException(String message) {
             super(message);
         }

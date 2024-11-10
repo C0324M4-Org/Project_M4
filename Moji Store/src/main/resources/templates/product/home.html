@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/home_admin.css">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow stick-top">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDv02IdyrSw4FEmtTrHItgia3GUVxa0xyHzw&s" alt="FIGUREONe">FIGUREONe
+            <img src="/img/logo_moji-removebg.png" alt="MOJI">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -86,31 +86,49 @@
     <div class="container text-center mts-5">
         <h2 class="mb-4">FLASH SALE TODAY</h2>
         <div class="countdown" id="countdown"></div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Product Description</th>
-                    <th>Price</th>
-                    <th>Image</th>
-                    <th>Category</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="product : ${products}">
-                    <td th:text="${product.id}">1</td>
-                    <td th:text="${product.name}">Sample Product</td>
-                    <td th:text="${product.description}">description Product</td>
-                    <td th:text="${product.price}">100.00</td>
-                    <td th:text="${product.image}">Null</td>
-                    <td th:text="${product.category.name}">Sample Category</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
-
+    <div class="product-grid">
+        <div class="product-card">
+            <img src="https://khomohinh.com/wp-content/uploads/2022/09/mo-hinh-ace-hoa-quyen-25cm-anime-one-piece-4.jpg.webp" alt="Product 1">
+            <div class="card-body">
+                <h5 class="card-title">Mô hình Ace hỏa quyền 25cm anime One Piece</h5>
+                <p class="card-text">450.000 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://khomohinh.com/wp-content/uploads/2023/07/mo-hinh-zoro-burning-torch-diem-vuong-gia-re-14.jpg" alt="Product 2">
+            <div class="card-body">
+                <h5 class="card-title">Mô hình Zoro Burning Torch 30cm giá rẻ</h5>
+                <p class="card-text">480.000 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://khomohinh.com/wp-content/uploads/2023/07/mo-hinh-zoro-tam-long-haki-35cm-gia-re-cuc-dep-3.jpg.webp" alt="Product 3">
+            <div class="card-body">
+                <h5 class="card-title">Mô hình Zoro Tam Long Haki 35cm giá rẻ cực đẹp</h5>
+                <p class="card-text">850.000 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://khomohinh.com/wp-content/uploads/2022/09/mo-hinh-boa-hancock-tu-the-chien-dau-20cm-pvc-one-piece-1.jpg.webp" alt="Product 4">
+            <div class="card-body">
+                <h5 class="card-title">Mô hình Boa Hancock 20cm PVC One Piece</h5>
+                <p class="card-text">135.000 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="https://down-vn.img.susercontent.com/file/sg-11134201-7rbkg-loy94o61qqr779@resize_w450_nl.webp" alt="Product 5">
+            <div class="card-body">
+                <h5 class="card-title">Mô Hình Nhân Vật Nữ anime Handmade Cao Cấp</h5>
+                <p class="card-text">978.317 VNĐ</p>
+                <a href="#" class="btn btn-primary">Shop Now</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -121,7 +139,10 @@
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
         document.getElementById("countdown").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+
+
         if (distance < 0) {
             clearInterval(x);
             document.getElementById("countdown").innerHTML = "Sale đã kết thúc!";
@@ -131,7 +152,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 <footer class="text-center mt-5">
     <div class="container">
         <h5>Thông Tin Liên Hệ</h5>

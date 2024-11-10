@@ -12,32 +12,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping
+@RequestMapping("/")
 public class ProductController {
     @Autowired
-    private IProductService IproductService;
+    private IProductService iProductService;
 
     @Autowired
-    private ICategoryService IcategoryService;
+    private ICategoryService iCategoryService;
+
+
 
     @GetMapping("")
     public String showList(Model model){
-        model.addAttribute("products",IproductService.findAll());
-        return "/Products/home_admin";
+        model.addAttribute("products", iProductService.findAll());
+        return "product/home";
     }
+
 
     @GetMapping("show-create-form")
     public String showCreateForm(Model model){
         model.addAttribute("productC", new Product());
-        model.addAttribute("listC", IcategoryService.findAll());
-        return "/Products/create";
+        model.addAttribute("listC", iCategoryService.findAll());
+        return "product/create";
     }
 
     @PostMapping("add")
     public String addProduct(@ModelAttribute("productC") Product product, RedirectAttributes redirectAttributes){
-        IproductService.save(product);
+        iProductService.save(product);
         redirectAttributes.addFlashAttribute("add","Thêm mới thành công");
-        return "redirect:/products";
+        return "redirect:/product";
     }
 
 
