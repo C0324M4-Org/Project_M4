@@ -1,6 +1,7 @@
-package com.example.moji_store.service;
+package com.example.moji_store.service.impl;
 import com.example.moji_store.model.Product;
 import com.example.moji_store.repository.IProductRepository;
+import com.example.moji_store.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

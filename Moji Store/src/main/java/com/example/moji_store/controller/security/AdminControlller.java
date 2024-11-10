@@ -1,4 +1,4 @@
-package com.example.moji_store.controller;
+package com.example.moji_store.controller.security;
 
 import com.example.moji_store.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
