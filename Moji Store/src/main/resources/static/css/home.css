@@ -1,4 +1,7 @@
-
+/* Ẩn dấu tam giác nhỏ (arrow) trong dropdown */
+#userMenu::after {
+    content: none !important;
+}
 
 .stick-top{
     position: sticky;
@@ -16,21 +19,7 @@
 .navbar:hover {
     background: linear-gradient(90deg, rgb(240, 193, 131),rgb(227, 128, 186));
 }
-/*.hero {*/
-/*    background-size: cover;*/
-/*    background-position: center;*/
-/*    padding: 20px;*/
-/*    color: #fff;*/
-/*}*/
-/*.hero h1 {*/
-/*    font-size: 48px;*/
-/*    font-weight: bold;*/
-/*    margin-bottom: 20px;*/
-/*}*/
-/*.hero p {*/
-/*    font-size: 24px;*/
-/*    margin-bottom: 40px;*/
-/*}*/
+
 .navbar-brand{
     font-family: 'Cinzel', serif;
     font-size: 25px;
@@ -59,9 +48,7 @@
     background-color: #b66060;
 
 }
-.d-flex{
-    width: 350px;
-}
+
 .btn-secondary{
     background-color:#b66060;
 }

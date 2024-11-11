@@ -1,7 +1,7 @@
 package com.example.moji_store.service.security;
 
 import com.example.moji_store.model.Account;
-import com.example.moji_store.repository.AccountRepository;
+import com.example.moji_store.repository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -16,33 +16,24 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private AccountRepository accountRepository;
+    private IAccountRepository IAccountRepository;
 
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         Account user;
-
-        // Kiểm tra nếu nhập vào có @
+        // check email hoac user
         if (usernameOrEmail.contains("@")) {
-            // Nếu là email, tìm theo email
-            user = accountRepository.findByEmail(usernameOrEmail);
+            user = IAccountRepository.findByEmail(usernameOrEmail);
         } else {
-            // Nếu không phải email, tìm theo username
-            user = accountRepository.findByUsername(usernameOrEmail);
+            user = IAccountRepository.findByUsername(usernameOrEmail);
         }
-
-        // Nếu không tìm thấy người dùng
         if (user == null) {
             throw new UsernameNotFoundException("Invalid email or username");
         }
 
-        // Lấy quyền của người dùng
-        List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
+        List<SimpleGrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 
-        // Trả về đối tượng User, với email nếu là email, hoặc username nếu là username
         return new User(user.getUsername(), user.getPassword(), authorities);
     }
 

@@ -1,4 +1,7 @@
-
+/* Ẩn dấu tam giác nhỏ (arrow) trong dropdown */
+#userMenu::after {
+    content: none !important;
+}
 .list-group-item {
     padding: 20px;
     font-size: 1.2em;

@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- thư viện Spring Security để sử dụng sec:authorize -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/spring-security/5.4.6/js/spring-security.js"></script>
 
     <link rel="stylesheet" th:href="@{/css/home.css}">
 
@@ -25,7 +23,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav d-flex w-100">
                 <li class="nav-item">
                     <a class="nav-link" href="#">PVC Figures</a>
                 </li>
@@ -44,6 +42,40 @@
                     </a>
                 </li>
 
+                <li class="ms-auto">
+                    <!-- Phần này hiển thị khi người dùng đã đăng nhập -->
+                    <div sec:authorize="isAuthenticated()" class="d-flex align-items-center position-relative">
+                        <span class="d-flex align-items-center">
+                            <!-- Icon mặt người -->
+                            <i class="bi bi-person-circle"></i>
+                            <span class="ms-2">Xin chào,
+                                <span sec:authentication="principal.username"></span>
+                            </span>
+                        </span>
+
+                        <!-- Icon menu dropdown bên cạnh -->
+                        <a class="nav-link dropdown-toggle ms-3" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                        </a>
+
+                        <!-- Dropdown menu -->
+                        <ul class="dropdown-menu dropdown-menu-end position-absolute" aria-labelledby="userMenu">
+                            <li><a class="dropdown-item" href="#">Xem thông tin tài khoản</a></li>
+                            <li><a class="dropdown-item" href="#">Quản lý giỏ hàng</a></li>
+                            <li><a class="dropdown-item" th:href="@{/admin}">Cài đặt</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Phần này hiển thị khi người dùng chưa đăng nhập -->
+                    <div sec:authorize="!isAuthenticated()">
+                        <a th:href="@{/login}" class="btn btn-outline-primary">Log in</a>
+                        <a th:href="@{/register}" class="btn btn-outline-primary">Register</a>
+                    </div>
+                </li>
+
+
             </ul>
         </div>
     </div>
@@ -53,24 +85,14 @@
     <div class="container">
         <div class="container_search">
             <div class="top-bar">
-                <form class="d-flex" action="student-servlet" method="get">
+                <form class="d-flex" action="" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Bạn đang tìm gì...">
+                        <label>
+                            <input type="text" class="form-control" name="search" placeholder="Bạn đang tìm gì...">
+                        </label>
                         <button type="submit" class="btn btn-secondary"><i class="bi-search"></i></button>
                     </div>
                 </form>
-
-                <div class="user-actions" sec:authorize="isAuthenticated()">
-    <span class="d-flex align-items-center">
-        <i class="bi bi-person-circle"></i> <!-- Icon người -->
-        <span class="ms-2">Xin chào, <span sec:authentication="principal.username"></span></span>
-        <a th:href="@{/logout}" class="btn btn-outline-primary ms-3">Logout</a>
-    </span>
-                </div>
-                <div class="user-actions" sec:authorize="!isAuthenticated()">
-                    <a th:href="@{/login}" class="btn btn-outline-primary">Log in</a>
-                    <a th:href="@{/user/register}" class="btn btn-outline-primary">Register</a>
-                </div>
 
 
             </div>
@@ -153,7 +175,10 @@
 </div>
 
 
+<!-- thư viện Spring Security để sử dụng sec:authorize -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spring-security/5.4.6/js/spring-security.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 <footer class="text-center mt-5">
     <div class="container">
