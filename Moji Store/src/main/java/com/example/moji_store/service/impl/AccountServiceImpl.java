@@ -19,7 +19,7 @@ public class AccountServiceImpl implements IAccountService {
     @Autowired
     private IAccountRepository iAccountRepository;
     @Autowired
-    private PasswordEncoder passwordEncoder;  // Được inject tự động từ SecurityConfig
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public Account findUserByEmail(String email) {

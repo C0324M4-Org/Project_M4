@@ -39,4 +39,9 @@ public class LoginController {
         accountService.save(account);
         return "redirect:/login";
     }
+
+    @GetMapping("error404")
+    public String handleError() {
+        return "error404";  // quá quyền sẽ qua đây
+    }
 }
