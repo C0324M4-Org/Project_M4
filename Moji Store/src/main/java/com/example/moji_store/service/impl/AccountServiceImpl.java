@@ -8,9 +8,9 @@ import com.example.moji_store.service.security.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.Collections;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AccountServiceImpl implements IAccountService {
@@ -32,19 +32,15 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
+    @Transactional
     public void save(Account account) {
         // Mã hóa mật khẩu
         String encodedPassword = passwordEncoder.encode(account.getPassword());
         account.setPassword(encodedPassword);
-
-        // Lấy các role từ cơ sở dữ liệu và gán cho account
-        List<Role> roles = account.getRoles().stream()
-                .map(role -> iRoleRepository.findByName(role.getName()))
-                .collect(Collectors.toList());
-
-        // Gán roles cho account
-        account.setRoles(roles);
-
+        // khởi tạo Role trực tiếp
+        Role userRole = new Role("ROLE_USER");
+        // gán role và lưu vào db
+        account.setRoles(Collections.singletonList(userRole));
         iAccountRepository.save(account);
     }
 }

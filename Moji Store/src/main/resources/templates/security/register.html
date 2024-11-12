@@ -14,22 +14,25 @@
             <form class="form-horizontal" method="post" role="form" th:action="@{/add-account}" th:object="${accounts}">
                 <div class="mb-3">
                     <label class="form-label" for="username">Username</label>
-                    <input class="form-control" id="username" name="username" th:field="*{username}" placeholder="Enter username" type="text" required>
+                    <input class="form-control" id="username" th:field="*{username}" placeholder="Enter username"
+                           type="text" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="email">Email</label>
-                    <input class="form-control" id="email" name="email" th:field="*{email}" placeholder="Enter email address" type="email" required>
+                    <input class="form-control" id="email" th:field="*{email}" placeholder="Enter email address"
+                           type="email" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="password">Password</label>
-                    <input class="form-control" id="password" name="password" th:field="*{password}" placeholder="Enter password" type="password" required>
+                    <input class="form-control" id="password" th:field="*{password}" placeholder="Enter password"
+                           type="password" required>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="roles">Roles</label>
-                    <select class="form-select" id="roles" name="roles" th:field="*{roles}" multiple>
-                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
-                    </select>
-                </div>
+                <!--                <div class="mb-3">-->
+                <!--                    <label class="form-label" for="roles">Roles</label>-->
+                <!--                    <select class="form-select" id="roles"  th:field="*{roles}">-->
+                <!--                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>-->
+                <!--                    </select>-->
+                <!--                </div>-->
                 <div class="mb-3">
                     <button class="btn btn-primary mb-3" type="submit">Register</button>
                     or <a class="link-primary" th:href="@{/login}">Login</a>

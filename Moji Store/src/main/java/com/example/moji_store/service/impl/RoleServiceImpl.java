@@ -13,6 +13,10 @@ public class RoleServiceImpl implements IRoleService {
     @Autowired
     private IRoleRepository iRoleRepository;
     @Override
+    public Role findByName(String name) {
+        return iRoleRepository.findByName(name);
+    }
+    @Override
     public List<Role> findAll() {
         return iRoleRepository.findAll();
     }

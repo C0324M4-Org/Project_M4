@@ -18,7 +18,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private IAccountRepository IAccountRepository;
 
-
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         Account user;

@@ -15,25 +15,20 @@ public class CategoryService implements ICategoryService {
 
     @Autowired
     private ICategoryRepository iCategoryRepository;
-
     @Autowired
     private IProductRepository iProductRepository;
-
     @Override
     public List<Category> findAll() {
         return iCategoryRepository.findAll();
     }
-
     @Override
     public Optional<Category> findById(Long id) {
         return iCategoryRepository.findById(id);
     }
-
     @Override
     public void saveCat(Category category) {
         iCategoryRepository.save(category);
     }
-
 
     public static class CannotDeleteCategoryException extends RuntimeException {
         public CannotDeleteCategoryException(String message) {
