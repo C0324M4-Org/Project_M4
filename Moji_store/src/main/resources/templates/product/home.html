@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<a th:href="@{/create}">Thêm mới Product</a>
+<a th:href="@{/category}">Danh sách Category</a>
+<!--<p class="conterner" th:text="${them}"></p>-->
+<!--<p class="conterner" th:text="${sua}"></p>-->
+<!--<p class="conterner" th:text="${xoa}"></p>-->
+<table border = 1 >
+  <thead>
+    <tr>
+        <th>Id</th>
+        <th>Tên sản phẩm</th>
+        <th>Ảnh sản phẩm</th>
+        <th>Giá sản phẩm</th>
+        <th>Hãng sản phẩm</th>
+        <th colspan="3">Chức năng</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="p, loop: ${list}">
+          <td th:text="${loop.count}"></td>
+          <td th:text="${p.name}"></td>
+          <td>
+              <img th:src="@{${p.img}}" alt="img" style="width: 100px; height: 100px">
+          </td>
+          <td th:text="${p.price}"></td>
+          <td th:text="${p.category.name}"></td>
+      <td>
+          <a th:href="@{/}">Sửa</a>
+          <a th:href="@{/}">Xóa</a>
+          <a th:href="@{/}">Xem</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
