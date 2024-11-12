@@ -1,45 +1,75 @@
 package com.example.moji_store.controller;
+
+import com.example.moji_store.model.Cart;
+import com.example.moji_store.model.CartItem;
 import com.example.moji_store.model.Product;
-import com.example.moji_store.service.ICategoryService;
-import com.example.moji_store.service.IProductService;
+import com.example.moji_store.service.ProductService;
+import com.example.moji_store.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping
+@SessionAttributes("cartId") // Sử dụng @SessionAttributes để lưu cartId trong session
 public class ProductController {
-    @Autowired
-    private IProductService IproductService;
 
     @Autowired
-    private ICategoryService IcategoryService;
+    private ProductService productService;
+
+    @Autowired
+    private CartService cartService;
+
+    @ModelAttribute("cartId")
+    public Long cartId() {
+        return null; // Trả về null nếu chưa có cartId trong session
+    }
 
     @GetMapping("")
-    public String showList(Model model){
-        model.addAttribute("products",IproductService.findAll());
-        return "/Products/home_admin";
+    public String findAll(Model model) {
+        List<Product> list = productService.findAllProducts();
+        model.addAttribute("list", list);
+        return "home";
     }
 
-    @GetMapping("show-create-form")
-    public String showCreateForm(Model model){
-        model.addAttribute("productC", new Product());
-        model.addAttribute("listC", IcategoryService.findAll());
-        return "/Products/create";
+    @PostMapping("/cart/add/{id}")
+    public String addToCart(@PathVariable Long id, @ModelAttribute("cartId") Long cartId, Model model) {
+        Optional<Product> optionalProduct = productService.findProductById(id);
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            Cart cart;
+
+            // Kiểm tra xem giỏ hàng đã tồn tại hay chưa
+            if (cartId == null) {
+                cart = new Cart();
+                cart = cartService.save(cart); // Lưu giỏ hàng mới vào DB
+                cartId = cart.getId(); // Lưu lại ID của giỏ hàng trong session
+                model.addAttribute("cartId", cartId); // Cập nhật lại cartId vào model
+            } else {
+                cart = cartService.findById(cartId).orElse(new Cart());
+            }
+
+            // Thêm sản phẩm vào giỏ hàng
+            CartItem cartItem = new CartItem(product, 1);
+            cartItem.setCart(cart); // Thiết lập mối quan hệ giữa CartItem và Cart
+            cart.getItems().add(cartItem); // Thêm sản phẩm vào danh sách items của giỏ hàng
+            cartService.save(cart); // Lưu lại giỏ hàng đã cập nhật vào DB
+        }
+        return "redirect:/"; // Quay lại trang chính sau khi thêm sản phẩm
     }
 
-    @PostMapping("add")
-    public String addProduct(@ModelAttribute("productC") Product product, RedirectAttributes redirectAttributes){
-        IproductService.save(product);
-        redirectAttributes.addFlashAttribute("add","Thêm mới thành công");
-        return "redirect:/products";
+    @GetMapping("/cart/view")
+    public String viewCart(@ModelAttribute("cartId") Long cartId, Model model) {
+        if (cartId != null) {
+            Optional<Cart> optionalCart = cartService.findById(cartId);
+            if (optionalCart.isPresent()) {
+                model.addAttribute("items", optionalCart.get().getItems());
+                model.addAttribute("total", optionalCart.get().getTotal());
+            }
+        }
+        return "cartView"; // Tên của view để hiển thị giỏ hàng
     }
-
-
-
 }
