@@ -4,38 +4,88 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Thêm thư viện Bootstrap Icons -->
     <title>Register</title>
 </head>
 <body>
 <div class="container">
     <div class="row mt-5">
         <div class="col-6 mx-auto">
-            <h1>Register Form</h1>
-            <form class="form-horizontal" method="post" role="form" th:action="@{/add-account}" th:object="${accounts}">
+            <h1>Trang Đăng ký tài khoản</h1>
+
+            <form class="form-horizontal" method="post" role="form" th:action="@{/register}" th:object="${registerDTO}">
                 <div class="mb-3">
-                    <label class="form-label" for="username">Username</label>
-                    <input class="form-control" id="username" th:field="*{username}" placeholder="Enter username"
-                           type="text" required>
+                    <label class="form-label" for="username">Tên đăng nhập:</label>
+                    <input class="form-control" id="username" name="username" th:field="*{username}"
+                           placeholder="Nhập tên đăng nhập" type="text">
+                    <div th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}"></div>
+                    <div th:if="${usernameError}" class="text-danger"><p th:text="${usernameError}"></p></div>
                 </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="fullName">Họ và tên:</label>
+                    <input class="form-control" id="fullName" name="fullName" th:field="*{fullName}"
+                           placeholder="Nhập Họ và tên" type="text">
+                    <div th:if="${#fields.hasErrors('fullName')}" class="text-danger" th:errors="*{fullName}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Giới tính</label>
+                    <label>
+                        <select class="form-select" name="gender" th:field="*{gender}">
+                            <option value="" disabled selected th:if="${#fields.hasErrors('gender')}">Chọn...</option>
+                            <option value="Male">Nam</option>
+                            <option value="Female">Nữ</option>
+                            <option value="Other">Khác</option>
+                        </select>
+                    </label>
+                    <div th:if="${#fields.hasErrors('gender')}" class="text-danger" th:errors="*{gender}"></div>
+                </div>
+
                 <div class="mb-3">
                     <label class="form-label" for="email">Email</label>
-                    <input class="form-control" id="email" th:field="*{email}" placeholder="Enter email address"
-                           type="email" required>
+                    <input class="form-control" id="email" name="email" th:field="*{email}"
+                           placeholder="Nhập địa chỉ email" type="email">
+                    <div th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></div>
+                    <div th:if="${emailError}" class="text-danger"><p th:text="${emailError}"></p></div>
                 </div>
+
+<!--                <div class="mb-3">-->
+<!--                    <label class="form-label" for="dob">Ngày sinh:</label>-->
+<!--                    <input class="form-control" id="dob" name="dob" th:field="*{dob}" type="date">-->
+<!--                    <div th:if="${#fields.hasErrors('dob')}" class="text-danger" th:errors="*{dob}"></div>-->
+<!--                </div>-->
+
                 <div class="mb-3">
-                    <label class="form-label" for="password">Password</label>
-                    <input class="form-control" id="password" th:field="*{password}" placeholder="Enter password"
-                           type="password" required>
+                    <label class="form-label" for="password">Mật khẩu</label>
+                    <div class="input-group">
+                        <input class="form-control" id="password" name="password" th:field="*{password}"
+                               placeholder="Nhập mật khẩu" type="password">
+                        <span class="input-group-text" id="eyeToggle" style="cursor: pointer;">
+                            <i class="bi bi-eye"></i>
+                        </span>
+                    </div>
+                    <div th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></div>
                 </div>
-                <!--                <div class="mb-3">-->
-                <!--                    <label class="form-label" for="roles">Roles</label>-->
-                <!--                    <select class="form-select" id="roles"  th:field="*{roles}">-->
-                <!--                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>-->
-                <!--                    </select>-->
-                <!--                </div>-->
+
                 <div class="mb-3">
-                    <button class="btn btn-primary mb-3" type="submit">Register</button>
-                    or <a class="link-primary" th:href="@{/login}">Login</a>
+                    <label class="form-label" for="confirmPassword">Xác nhận mật khẩu:</label>
+                    <div class="input-group">
+                        <input class="form-control" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}"
+                               placeholder="Xác nhận mật khẩu" type="password" >
+                        <span class="input-group-text" id="eyeToggleConfirm" style="cursor: pointer;">
+                            <i class="bi bi-eye"></i>
+                        </span>
+                    </div>
+                    <div th:if="${#fields.hasErrors('confirmPassword')}" class="text-danger" th:errors="*{confirmPassword}"></div>
+                    <div th:if="${passwordError}" class="text-danger">
+                        <p th:text="${passwordError}"></p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-primary mb-3" type="submit">Đăng ký</button>
+                    or <a class="link-primary" th:href="@{/login}">Đăng nhập</a>
                 </div>
             </form>
         </div>
@@ -43,5 +93,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/eye-password.js"></script>
 </body>
 </html>

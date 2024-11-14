@@ -1,4 +1,4 @@
-package com.example.moji_store.config.security;
+package com.example.moji_store.config;
 
 import com.example.moji_store.common.EncryptPasswordUtils;
 import com.example.moji_store.model.Account;

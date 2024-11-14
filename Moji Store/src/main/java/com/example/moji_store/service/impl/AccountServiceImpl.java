@@ -32,16 +32,33 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
-    @Transactional
     public void save(Account account) {
+
         // Mã hóa mật khẩu
         String encodedPassword = passwordEncoder.encode(account.getPassword());
         account.setPassword(encodedPassword);
-        // khởi tạo Role trực tiếp
-        Role userRole = new Role("ROLE_USER");
-        // gán role và lưu vào db
+
+        // Kiểm tra xem ROLE_USER đã có trong cơ sở dữ liệu chưa
+        Role userRole = iRoleRepository.findByName("ROLE_USER");
+        if (userRole == null) {
+            // Nếu chưa có role, tạo role mới và lưu vào cơ sở dữ liệu
+            userRole = new Role();
+            userRole.setName("ROLE_USER");
+            iRoleRepository.save(userRole);
+        }
         account.setRoles(Collections.singletonList(userRole));
+
         iAccountRepository.save(account);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return iAccountRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return iAccountRepository.existsByUsername(username);
     }
 }
 

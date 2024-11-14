@@ -8,4 +8,6 @@ public interface IAccountService {
     Account findUserByEmail(String email);
     Account findByUsername(String username);
     void save(Account account);
+    boolean existsByEmail(String email);
+    boolean existsByUsername(String username);
 }

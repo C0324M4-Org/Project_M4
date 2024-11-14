@@ -71,7 +71,7 @@
                     <!-- Phần này hiển thị khi người dùng chưa đăng nhập -->
                     <div sec:authorize="!isAuthenticated()">
                         <a th:href="@{/login}" class="btn btn-outline-primary">Log in</a>
-                        <a th:href="@{/register}" class="btn btn-outline-primary">Register</a>
+                        <a th:href="@{/register-form}" class="btn btn-outline-primary">Register</a>
                     </div>
                 </li>
 
