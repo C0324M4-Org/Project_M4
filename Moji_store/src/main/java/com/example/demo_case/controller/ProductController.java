@@ -22,7 +22,7 @@ public class ProductController {
     @GetMapping("")
     public String showList(Model model){
         model.addAttribute("list", iProductService.findALl());
-        return "product/home";
+        return "product/Home_user";
     }
 
     @GetMapping("show-create")
