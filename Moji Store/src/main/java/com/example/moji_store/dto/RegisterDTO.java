@@ -31,20 +31,21 @@ public class RegisterDTO {
     @NotNull(message = "*Vui lòng xác nhận lại mật khẩu")
     private String confirmPassword;
 
-//    @NotNull(message = "*Vui lòng nhập ngày sinh")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @Past(message = "*Ngày sinh không được quá ngày hiện tại")
+    @NotNull(message = "*Vui lòng nhập ngày sinh")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Past(message = "*Ngày sinh không được quá ngày hiện tại")
 //    @ValidAge
-//    private LocalDate dob;
+    private LocalDate dob;
 
-    public RegisterDTO(String username, String fullName,String gender, String email, String password, String confirmPassword) {
+    public RegisterDTO(String username, String fullName,String gender, String email,
+                       String password, String confirmPassword, LocalDate dob) {
         this.username = username;
         this.fullName = fullName;
         this.gender = gender;
         this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
-//        this.dob = dob;
+        this.dob = dob;
     }
 
     public RegisterDTO() {
@@ -98,13 +99,13 @@ public class RegisterDTO {
         this.confirmPassword = confirmPassword;
     }
 
-//    public LocalDate getDob() {
-//        return dob;
-//    }
-//
-//    public void setDob(LocalDate dob) {
-//        this.dob = dob;
-//    }
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
 
     public boolean isPasswordMatch() {
         return this.password.equals(this.confirmPassword);

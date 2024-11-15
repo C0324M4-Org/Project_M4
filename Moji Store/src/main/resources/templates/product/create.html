@@ -2,9 +2,60 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Thêm Sản Phẩm</title>
 </head>
 <body>
+<div class="container mt-5">
+    <h2>Thêm Sản Phẩm</h2>
 
+    <!-- Hiển thị thông báo nếu có -->
+    <div th:if="${add}" class="alert alert-success" role="alert">
+        <p th:text="${add}"></p>
+    </div>
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+
+    <form th:action="@{/add}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Tên sản phẩm:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Mô tả:</label>
+            <textarea class="form-control" id="description" name="description" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Giá:</label>
+            <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="categoryId">Danh mục:</label>
+            <select class="form-control" id="categoryId" name="categoryId" required>
+                <!-- Giả sử bạn đã có danh sách danh mục trong model -->
+                <option th:each="category : ${listC}"
+                        th:value="${category.id}"
+                        th:text="${category.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Tải ảnh lên:</label>
+            <input type="file" class="form-control-file" id="image" name="image" accept="/img/*" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+        <a href="/" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

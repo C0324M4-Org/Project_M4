@@ -2,7 +2,9 @@ package com.example.moji_store.model;
 
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,8 @@ public class Account {
     private String username;
     private String fullName;
     private String gender;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dob;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -29,16 +33,33 @@ public class Account {
     )
     private List<Role> roles = new ArrayList<>();
 
-    public Account(String username, String fullName, String gender, String email, String password, List<Role> roles) {
+    public Account(String username, String fullName, String gender, LocalDate dob, String email, String password, List<Role> roles) {
         this.username = username;
         this.fullName = fullName;
         this.gender = gender;
+        this.dob = dob;
         this.email = email;
         this.password = password;
         this.roles = roles;
     }
 
     public Account() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFullName() {
@@ -57,12 +78,12 @@ public class Account {
         this.gender = gender;
     }
 
-    public Long getId() {
-        return id;
+    public LocalDate getDob() {
+        return dob;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     public String getEmail() {
@@ -87,13 +108,5 @@ public class Account {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 }

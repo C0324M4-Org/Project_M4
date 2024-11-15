@@ -9,8 +9,8 @@ public class Product {
     private String name;
     private String description;
     private int price;
+    @Column(name = "image")
     private String image;
-
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     Category category;

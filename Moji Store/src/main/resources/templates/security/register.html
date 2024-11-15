@@ -50,11 +50,11 @@
                     <div th:if="${emailError}" class="text-danger"><p th:text="${emailError}"></p></div>
                 </div>
 
-<!--                <div class="mb-3">-->
-<!--                    <label class="form-label" for="dob">Ngày sinh:</label>-->
-<!--                    <input class="form-control" id="dob" name="dob" th:field="*{dob}" type="date">-->
-<!--                    <div th:if="${#fields.hasErrors('dob')}" class="text-danger" th:errors="*{dob}"></div>-->
-<!--                </div>-->
+                <div class="mb-3">
+                    <label class="form-label" for="dob">Ngày sinh:</label>
+                    <input class="form-control" id="dob" name="dob" th:field="*{dob}" type="date">
+                    <div th:if="${#fields.hasErrors('dob')}" class="text-danger" th:errors="*{dob}"></div>
+                </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="password">Mật khẩu</label>
