@@ -9,15 +9,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://pos.nvnstatic.net/cache/location.vn.js?v=241031_112511" defer></script>
     <script src="https://web.nvnstatic.net/js/lazyLoad/lazysizes.min.js" async></script>
+    <style>
+        .product-items {
+            position: relative;
+            width: 150px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+        .images img {
+            width: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+        .hidden-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(82, 137, 170, 0.63);
+            color: #ffffff;
+            font-size: 18px;
+            text-align: center;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .product-items.zoom .images img {
+            transform: scale(1.5);
+        }
+        .product-items.zoom .hidden-text {
+            display: flex;
+        }
+    </style>
 </head>
 <body>
 <header class="header">
     <div class="header-top">
         <div class="col text-right">
             <p>
-                        <span style="font-size:20px;">
-                            <a href="/he-thong-cua-hang">THÔNG TIN CỬA HÀNG</a>
-                        </span>
+                <span style="font-size:20px;">
+                    <a href="/he-thong-cua-hang">THÔNG TIN CỬA HÀNG</a>
+                </span>
             </p>
         </div>
     </div>
@@ -26,7 +60,7 @@
             <div class="row align-center">
                 <div class="head-col-left col-lg-3 col-12">
                     <a href="/" class="logo">
-                        <img src="https://pos.nvncdn.com/cba2a3-7534/store/20241029_ZuNLSm1a.png" alt="Logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH0Oa__wY2oVzrLcdA0z-BVW0FTpp9ZU5-mw&s" alt="Logo">
                     </a>
                 </div>
                 <div class="head-col-center col-lg-6 d-none d-lg-block">
@@ -97,13 +131,18 @@
                         Từ <span id="price_form" data-size="0">0đ</span>
                         :
                         <span id="price_to" data-size="500000" data-max="500000">500,000đ</span>
+                        <div id="slider-range"></div>
 
                     </div>
+                    <div class="filter-title">
+                        <h5 style="color: #8689d5;">VIDEO</h5>
+                    </div>
+                    <div> <iframe width="250" height="200" src="https://www.youtube.com/embed/8H0JARo8NCA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </div>
                 </div>
             </div>
             <div class="col-lg-9 col-12">
                 <div class="d-pro-head">
-                    <h5 style="color:#8689d5;">Tìm kiếm: </h5>
+                    <h5 style="color:#5d79b5">Tìm kiếm: </h5>
                     <select onchange="window.location.href = this.value" class="form-control d-none d-xl-block">
                         <option value="/search?q=&show=">Mới nhất</option>
                         <option value="/search?q=&show=priceAsc">Giá tăng dần</option>
@@ -202,7 +241,36 @@
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div></div>
+
+                    <div class="d-pro-head">
+                        <h5 style="color:#5d79b5;">Bộ sưu tập</h5>
+                    </div>
+                    <div class="product-list">
+                        <div class="row">
+                            <div class="product-items itemPrd37922932 item37922932 col-lg-3 col-md-4 col-6 col-xxs-12" data-type="1" data-psId="37922932">
+                                <div class="images">
+                                    <a href="javascript:void(0);" title="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
+                                        <img data-sizes="auto" class="lazyload" src="https://jola.vn/cdn/720/Product/d13huwOqL/o1cn017lokxu2ltrk35ydye-2211283779693-0-cib.jpg" alt="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
+                                    </a>
+                                    <div class="hidden-text" id="hiddenText">
+                                        Mô hình One Piece
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-items itemPrd37922932 item37922932 col-lg-3 col-md-4 col-6 col-xxs-12" data-type="1" data-psId="37922932">
+                                <div class="images">
+                                    <a href="javascript:void(0);" title="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
+                                        <img data-sizes="auto" class="lazyload" src="https://jola.vn/cdn/720/Product/d13huwOqL/o1cn017lokxu2ltrk35ydye-2211283779693-0-cib.jpg" alt="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
+                                    </a>
+                                    <div class="hidden-text" id="hiddenText1">
+                                        Mô hình Your Name
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <div class="d-block full">
                     <ul class="pagination justify-content-center">
                         <li class="page-item " data-pr="1">
@@ -228,22 +296,31 @@
             </div>
         </div>
     </div>
+    </div>
 </main>
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const wishIcons = document.querySelectorAll('.product-action .wish i');
-        const cartIcons = document.querySelectorAll('.product-action .js-add-cart i');
+    const productItems = document.querySelectorAll('.product-items');
 
-        wishIcons.forEach(icon => {
-            icon.addEventListener('click', () => {
-                icon.classList.toggle('active');
+    productItems.forEach(productItem => {
+        const imageLink = productItem.querySelector('.images a');
+        const hiddenText = productItem.querySelector('.hidden-text');
+
+        // Thêm sự kiện click vào mỗi phần tử hình ảnh
+        imageLink.addEventListener('click', (event) => {
+            event.stopPropagation();
+            productItems.forEach(item => {
+                if (item !== productItem) {
+                    item.classList.remove('zoom');
+                }
             });
+            productItem.classList.toggle('zoom');
         });
+    });
 
-        cartIcons.forEach(icon => {
-            icon.addEventListener('click', () => {
-                icon.classList.toggle('active');
-            });
+    // Thêm sự kiện click vào tài liệu để ẩn chữ khi click ra ngoài
+    document.addEventListener('click', () => {
+        productItems.forEach(productItem => {
+            productItem.classList.remove('zoom');
         });
     });
 </script>
