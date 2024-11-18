@@ -159,94 +159,32 @@
                     </select>
                 </div>
 
-                <div class="product-list">
+                <div th:each="product : ${list}" class="product-list">
                     <div class="row">
-                        <div class="product-item itemPrd37922850 item37922850 col-lg-3 col-md-4 col-6 col-xxs-12" data-type="1" data-psId="37922850">
-                            <div class="image">
-                                <span class="flag">New</span>
-                                <a href="/bo-thuoc-ke-chiikawa-cosplay-sinh-vat-bien-15cm-p37922850.html" title="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
-                                    <img data-sizes="auto" class="lazyload" src="https://jola.vn/cdn/720/Product/d13huwOqL/o1cn017lokxu2ltrk35ydye-2211283779693-0-cib.jpg" alt="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
-                                </a>
-                                <div class="product-action d-flex align-center justify-content-center">
-                                    <div class="wish" data-psId="37922850">
-                                        <i class="fas fa-heart"></i>
-                                    </div>
-                                    <div class="js-add-cart" data-psId="37922850" data-root="-2">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="name">
-                                <a href="/bo-thuoc-ke-chiikawa-cosplay-sinh-vat-bien-15cm-p37922850.html" title="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm                                        </a>
-                            </h3>
-                            <div class="product-price">
-                                <span class="price">30.000đ</span>
-                            </div>
-                        </div>
+
                         <div class="product-item itemPrd37922932 item37922932 col-lg-3 col-md-4 col-6 col-xxs-12" data-type="1" data-psId="37922932">
                             <div class="image">
                                 <span class="flag">New</span>
-                                <a href="/moc-khoa-nhoi-bong-basic-baby-bear-dung-1-mau-long-xoan-p37922932.html" title="Móc khóa nhồi bông Basic baby bear đứng 1 màu lông xoắn">
-                                    <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/img/lazyLoading.gif?v=3" data-src="https://pos.nvncdn.com/cba2a3-7534/ps/20241107_R0okRP0Sph.jpeg" alt="Móc khóa nhồi bông Basic baby bear đứng 1 màu lông xoắn">
+                                <a th:href="@{/}" title="image">
+                                    <img data-sizes="auto" class="lazyload" th:src="${product.image}" data-src="" alt="image">
                                 </a>
                                 <div class="product-action d-flex align-center justify-content-center">
-                                    <div class="wish" data-psId="37922850">
+                                    <!-- Thẻ a bọc icon yêu thích (Heart) -->
+                                    <a href="/" class="wish" data-psId="37922850">
                                         <i class="fas fa-heart"></i>
-                                    </div>
-                                    <div class="js-add-cart" data-psId="37922850" data-root="-2">
+                                    </a>
+
+                                    <!-- Thẻ a bọc icon giỏ hàng (Shopping Cart) -->
+                                    <a th:href="@{/}" class="js-add-cart" data-psId="37922850" data-root="-2">
                                         <i class="fas fa-shopping-cart"></i>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
-                            <h3 class="name">
-                                <a href="/moc-khoa-nhoi-bong-basic-baby-bear-dung-1-mau-long-xoan-p37922932.html" title="Móc khóa nhồi bông Basic baby bear đứng 1 màu lông xoắn">Móc khóa nhồi bông Basic baby bear đứng 1 màu lông xoắn                                        </a>
-                            </h3>
+                            <h1 class="name">
+                                <a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}"></a>
+                            </h1>
                             <div class="product-price">
-                                <span class="price">70.000đ</span>
-                            </div>
-                        </div>
-                        <div class="product-item itemPrd37922724 item37922724 col-lg-3 col-md-4 col-6 col-xxs-12" data-type="1" data-psId="37922724">
-                            <div class="image">
-                                <span class="flag">New</span>
-                                <a href="/qua-cau-tuyet-xmas-sanrio-family-cay-thong-goi-qua-co-den-nhac-8x13-p37922724.html" title="Quả cầu tuyết Xmas Sanrio family cây thông gói quà có đèn nhạc 8x13">
-                                    <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/img/lazyLoading.gif?v=3" data-src="https://pos.nvncdn.com/cba2a3-7534/ps/20241107_jJ3mICQGQh.jpeg" alt="Quả cầu tuyết Xmas Sanrio family cây thông gói quà có đèn nhạc 8x13">
-                                </a>
-                                <div class="product-action d-flex align-center justify-content-center">
-                                    <div class="wish" data-psId="37922850">
-                                        <i class="fas fa-heart"></i>
-                                    </div>
-                                    <div class="js-add-cart" data-psId="37922850" data-root="-2">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="name">
-                                <a href="/qua-cau-tuyet-xmas-sanrio-family-cay-thong-goi-qua-co-den-nhac-8x13-p37922724.html" title="Quả cầu tuyết Xmas Sanrio family cây thông gói quà có đèn nhạc 8x13">Quả cầu tuyết Xmas Sanrio family cây thông gói quà có đèn nhạc 8x13                                        </a>
-                            </h3>
-                            <div class="product-price">
-                                <span class="price">160.000đ</span>
-                            </div>
-                        </div>
-                        <div class="product-item itemPrd37922932 item37922932 col-lg-3 col-md-4 col-6 col-xxs-12" data-type="1" data-psId="37922932">
-                            <div class="image">
-                                <span class="flag">New</span>
-                                <a href="/moc-khoa-nhoi-bong-basic-baby-bear-dung-1-mau-long-xoan-p37922932.html" title="Móc khóa nhồi bông Basic baby bear đứng 1 màu lông xoắn">
-                                    <img data-sizes="auto" class="lazyload" src="https://web.nvnstatic.net/img/lazyLoading.gif?v=3" data-src="https://pos.nvncdn.com/cba2a3-7534/ps/20241107_R0okRP0Sph.jpeg" alt="Móc khóa nhồi bông Basic baby bear đứng 1 màu lông xoắn">
-                                </a>
-                                <div class="product-action d-flex align-center justify-content-center">
-                                    <div class="wish" data-psId="37922850">
-                                        <i class="fas fa-heart"></i>
-                                    </div>
-                                    <div class="js-add-cart" data-psId="37922850" data-root="-2">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="name">
-                                <a href="/moc-khoa-nhoi-bong-basic-baby-bear-dung-1-mau-long-xoan-p37922932.html" title="Móc khóa nhồi bông Basic baby bear đứng 1 màu lông xoắn">Móc khóa nhồi bông Basic baby bear đứng 1 màu lông xoắn                                        </a>
-                            </h3>
-                            <div class="product-price">
-                                <span class="price">70.000đ</span>
+                                <span class="price" th:text="${product.price} + ' đ'"></span>
                             </div>
                         </div>
                     </div>
@@ -257,56 +195,6 @@
                                 <a class="page-link" style="background: #88bcbb; color: #ffffff; margin: 10px 0 10px 0 ">Xem Thêm</a>
                             </li>
 
-                        </ul>
-                    </div>
-
-                    <div class="d-pro-head">
-                        <h5 style="color:#5d79b5;">Mô hình trưng bày</h5>
-                    </div>
-                    <div class="product-list">
-                        <div class="row">
-                            <div class="product-items itemPrd37922932 item37922932 col-lg-3 col-md-4 col-6 col-xxs-12" data-type="1" data-psId="37922932">
-                                <div class="images">
-                                    <a href="javascript:void(0);" title="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
-                                        <img data-sizes="auto" class="lazyload" src="https://jola.vn/cdn/720/Product/d13huwOqL/o1cn017lokxu2ltrk35ydye-2211283779693-0-cib.jpg" alt="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
-                                    </a>
-                                    <div class="hidden-text" id="hiddenText">
-                                        Mô hình One Piece
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-items itemPrd37922932 item37922932 col-lg-3 col-md-4 col-6 col-xxs-12" data-type="1" data-psId="37922932">
-                                <div class="images">
-                                    <a href="javascript:void(0);" title="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
-                                        <img data-sizes="auto" class="lazyload" src="https://jola.vn/cdn/720/Product/d13huwOqL/o1cn017lokxu2ltrk35ydye-2211283779693-0-cib.jpg" alt="Bộ thước kẻ Chiikawa cosplay sinh vật biển 15cm">
-                                    </a>
-                                    <div class="hidden-text" id="hiddenText1">
-                                        Mô hình Your Name
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-block full" style="margin-top: 10px">
-                        <ul class="pagination justify-content-center" >
-                            <li class="page-item " data-pr="1">
-                                <a class="page-link">1</a>
-                            </li>
-                            <li class="page-item" data-pr="2">
-                                <a class="page-link" href="/search?q=&page=2">2</a>
-                            </li>
-                            <li class="page-item" data-pr="3">
-                                <a class="page-link" href="/search?q=&page=3">3</a>
-                            </li>
-                            <li class="page-item" data-pr="4">
-                                <a class="page-link" href="/search?q=&page=4">4</a>
-                            </li>
-                            <li class="page-item" data-pr="5">
-                                <a class="page-link" href="/search?q=&page=5">5</a>
-                            </li>
-                            <li class="page-item round" data-pr="2">
-                                <a class="page-link" href="/search?q=&page=2">Next</a>
-                            </li>
                         </ul>
                     </div>
             </div>
