@@ -2,9 +2,7 @@ package com.example.moji_store.controller;
 
 import com.example.moji_store.dto.RegisterDTO;
 import com.example.moji_store.model.Account;
-import com.example.moji_store.model.Role;
 import com.example.moji_store.service.impl.AccountServiceImpl;
-import com.example.moji_store.service.impl.RoleServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 @RequestMapping("/")
 public class LoginController {
     private final AccountServiceImpl accountService;
-    private final RoleServiceImpl roleService;
+
     @Autowired
-    public LoginController(AccountServiceImpl accountService, RoleServiceImpl roleService){
+    public LoginController(AccountServiceImpl accountService ){
         this.accountService = accountService;
-        this.roleService = roleService;
     }
 
     @GetMapping("/login")
@@ -46,6 +40,7 @@ public class LoginController {
                                 BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("registerDTO", registerDTO);
             return "security/register";
         }
 
@@ -70,6 +65,8 @@ public class LoginController {
 
         return "redirect:/login";
     }
+
+
 
     @GetMapping("/error404")
     public String handleError() {

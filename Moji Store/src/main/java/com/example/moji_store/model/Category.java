@@ -1,5 +1,7 @@
 package com.example.moji_store.model;
+
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
@@ -9,7 +11,7 @@ public class Category {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private List<Product> products;
 
     public Category() {

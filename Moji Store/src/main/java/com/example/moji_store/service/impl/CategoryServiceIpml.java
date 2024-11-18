@@ -1,5 +1,4 @@
 package com.example.moji_store.service.impl;
-
 import com.example.moji_store.model.Category;
 import com.example.moji_store.repository.ICategoryRepository;
 import com.example.moji_store.repository.IProductRepository;
@@ -10,13 +9,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
-public class CategoryService implements ICategoryService {
+public class CategoryServiceIpml implements ICategoryService {
+    private final ICategoryRepository iCategoryRepository;
+    private final IProductRepository iProductRepository;
 
     @Autowired
-    private ICategoryRepository iCategoryRepository;
-    @Autowired
-    private IProductRepository iProductRepository;
+    public CategoryServiceIpml(ICategoryRepository iCategoryRepository, IProductRepository iProductRepository) {
+        this.iCategoryRepository = iCategoryRepository;
+        this.iProductRepository = iProductRepository;
+    }
+
     @Override
     public List<Category> findAll() {
         return iCategoryRepository.findAll();

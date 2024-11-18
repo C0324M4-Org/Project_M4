@@ -16,45 +16,45 @@ import java.util.List;
 @Component
 public class DataSeedingListener implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
-    private IAccountRepository IAccountRepository;
+    private IAccountRepository iAccountRepository;
 
     @Autowired
-    private IRoleRepository IRoleRepository;
+    private IRoleRepository iRoleRepository;
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        if (IRoleRepository.findByName("ROLE_ADMIN") == null) {
-            IRoleRepository.save(new Role("ROLE_ADMIN"));
+        if (iRoleRepository.findByName("ROLE_ADMIN") == null) {
+            iRoleRepository.save(new Role("ROLE_ADMIN"));
         }
 
-        if (IRoleRepository.findByName("ROLE_USER") == null) {
-            IRoleRepository.save(new Role("ROLE_USER"));
+        if (iRoleRepository.findByName("ROLE_USER") == null) {
+            iRoleRepository.save(new Role("ROLE_USER"));
         }
 
         //them admin
-        if (IAccountRepository.findByEmail("admin@gmail.com") == null) {
+        if (iAccountRepository.findByEmail("admin@gmail.com") == null) {
             Account admin = new Account();
             admin.setUsername("admin");
             admin.setEmail("admin@gmail.com");
             // mã hóa mật khẩu
             admin.setPassword(EncryptPasswordUtils.EncryptPasswordUtils("123"));
             List<Role> roles = new ArrayList<>();
-            roles.add(IRoleRepository.findByName("ROLE_ADMIN"));
-            roles.add(IRoleRepository.findByName("ROLE_USER"));
+            roles.add(iRoleRepository.findByName("ROLE_ADMIN"));
+            roles.add(iRoleRepository.findByName("ROLE_USER"));
             admin.setRoles(roles);
-            IAccountRepository.save(admin);
+            iAccountRepository.save(admin);
         }
 
         //Them user
-        if (IAccountRepository.findByEmail("user@gmail.com") == null) {
+        if (iAccountRepository.findByEmail("user@gmail.com") == null) {
             Account user = new Account();
             user.setUsername("user");
             user.setEmail("user@gmail.com");
             // mã hóa mật khẩu
             user.setPassword(EncryptPasswordUtils.EncryptPasswordUtils("123"));
             List<Role> roles = new ArrayList<>();
-            roles.add(IRoleRepository.findByName("ROLE_USER"));
+            roles.add(iRoleRepository.findByName("ROLE_USER"));
             user.setRoles(roles);
-            IAccountRepository.save(user);
+            iAccountRepository.save(user);
         }
     }
 

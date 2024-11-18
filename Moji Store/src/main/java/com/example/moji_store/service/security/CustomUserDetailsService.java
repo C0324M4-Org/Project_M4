@@ -16,16 +16,16 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private IAccountRepository IAccountRepository;
+    private IAccountRepository iAccountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
         Account user;
         // check email hoac user
         if (usernameOrEmail.contains("@")) {
-            user = IAccountRepository.findByEmail(usernameOrEmail);
+            user = iAccountRepository.findByEmail(usernameOrEmail);
         } else {
-            user = IAccountRepository.findByUsername(usernameOrEmail);
+            user = iAccountRepository.findByUsername(usernameOrEmail);
         }
         if (user == null) {
             throw new UsernameNotFoundException("Invalid email or username");
