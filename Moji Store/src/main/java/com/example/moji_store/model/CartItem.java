@@ -3,9 +3,7 @@ package com.example.moji_store.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cart_items")
 public class CartItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,25 +12,11 @@ public class CartItem {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
+    private String productName;
     private int quantity;
+    private double price;
 
-    public CartItem() {}
-
-    public CartItem(Product product, int quantity) {
-        this.product = product;
-        this.quantity = quantity;
-    }
-
-    public double getTotalPrice() {
-        return product.getPrice() * quantity;
-    }
-
-    // Getters and Setters
-
+    // Getters và Setters
     public Long getId() {
         return id;
     }
@@ -46,15 +30,15 @@ public class CartItem {
     }
 
     public void setCart(Cart cart) {
-        this.cart = cart; // Thiết lập mối quan hệ với Cart
+        this.cart = cart;
     }
 
-    public Product getProduct() {
-        return product;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getQuantity() {
@@ -63,5 +47,13 @@ public class CartItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

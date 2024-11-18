@@ -3,6 +3,7 @@ package com.example.moji_store.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "categories")
 public class Category {
 
     @Id
@@ -12,8 +13,6 @@ public class Category {
     private String name;
 
     public Category() {}
-
-    // Getters and Setters
 
     public Long getId() {
         return id;

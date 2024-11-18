@@ -1,37 +1,52 @@
 package com.example.moji_store.model;
 
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "carts")
 public class Cart {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String userId; // Người dùng liên kết với giỏ hàng
+
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
 
-    public void addItem(CartItem item) {
-        item.setCart(this); // Thiết lập mối quan hệ hai chiều
-        items.add(item);
+    private double totalPrice;
+
+    // Getters và Setters
+    public Long getId() {
+        return id;
     }
 
-    public void removeItem(Long productId) {
-        items.removeIf(item -> item.getProduct().getId().equals(productId));
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public List<CartItem> getItems() {
         return items;
     }
 
-    public double getTotal() {
-        return items.stream().mapToDouble(CartItem::getTotalPrice).sum();
+    public void setItems(List<CartItem> items) {
+        this.items = items;
     }
 
-    // Getters and Setters
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }
