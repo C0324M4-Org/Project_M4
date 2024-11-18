@@ -9,9 +9,14 @@ public class Product {
     private String name;
     private String description;
     private int price;
+    @Column(name = "image")
     private String image;
+<<<<<<< HEAD
 
     @ManyToOne(fetch = FetchType.EAGER)
+=======
+    @ManyToOne
+>>>>>>> 54eb4666dc03f63ecfa67d9b17e91979924cdc75
     @JoinColumn(name = "category_id", nullable = false)
     Category category;
 

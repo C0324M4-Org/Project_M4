@@ -2,6 +2,7 @@ package com.example.moji_store.model;
 
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,6 +17,10 @@ public class Account {
     private String username;
     private String fullName;
     private String gender;
+<<<<<<< HEAD
+=======
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+>>>>>>> 54eb4666dc03f63ecfa67d9b17e91979924cdc75
     private LocalDate dob;
 
     @Column(nullable = false, unique = true)
@@ -43,6 +48,22 @@ public class Account {
     public Account() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -59,12 +80,12 @@ public class Account {
         this.gender = gender;
     }
 
-    public Long getId() {
-        return id;
+    public LocalDate getDob() {
+        return dob;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     public String getEmail() {
@@ -90,6 +111,7 @@ public class Account {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+<<<<<<< HEAD
 
     public String getUsername() {
         return username;
@@ -106,4 +128,6 @@ public class Account {
     public void setDob(LocalDate dob) {
         this.dob = dob;
     }
+=======
+>>>>>>> 54eb4666dc03f63ecfa67d9b17e91979924cdc75
 }

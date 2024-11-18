@@ -34,10 +34,18 @@ public class RegisterDTO {
     @NotNull(message = "*Vui lòng nhập ngày sinh")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past(message = "*Ngày sinh không được quá ngày hiện tại")
+<<<<<<< HEAD
     @ValidAge
     private LocalDate dob;
 
     public RegisterDTO(String username, String fullName,String gender, String email, String password, String confirmPassword, LocalDate dob) {
+=======
+//    @ValidAge
+    private LocalDate dob;
+
+    public RegisterDTO(String username, String fullName,String gender, String email,
+                       String password, String confirmPassword, LocalDate dob) {
+>>>>>>> 54eb4666dc03f63ecfa67d9b17e91979924cdc75
         this.username = username;
         this.fullName = fullName;
         this.gender = gender;
