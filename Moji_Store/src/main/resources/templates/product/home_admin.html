@@ -9,9 +9,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://pos.nvnstatic.net/cache/location.vn.js?v=241031_112511" defer></script>
     <script src="https://web.nvnstatic.net/js/lazyLoad/lazysizes.min.js" async></script>
+
     <style>
-        .col-lg-9 {
-            max-width: 100%;
+        .widget_price_filter {
+            margin: 20px 0;
+        }
+        #slider-range {
+            margin-top: 10px;
+        }
+        .price-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -103,19 +113,7 @@
 <main class="mains blk-pro-cat sty-none">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-12 js-fil-bar">
-                <div class="filter-groups">
-                    <div class="filter-title">
-                        <h5 style="color: #8689d5;">GIÁ</h5>
-                    </div>
-                    <div class="widget_price_filter">
-                        Từ <span id="price_form" data-size="0">0đ</span>
-                        :
-                        <span id="price_to" data-size="500000" data-max="500000">500,000đ</span>
-                        <div id="slider-range"></div>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-lg-9 col-12">
                 <div>
                     <a th:href="@{/show-create}">THÊM MỚI SẢN PHẨM </a>
@@ -143,7 +141,7 @@
                             <td th:text="${loop.count}"></td>
                             <td th:text="${p.name}"></td>
                             <td>
-                                <img th:src="${p.image}" alt="img" style="width: 100px; height: 100px">
+                                <img th:src="${p.image}" alt="img" style="width: 125px; height: auto">
                             </td>
                             <td th:text="${p.price}"></td>
                             <td th:text="${p.category.name}"></td>
@@ -162,5 +160,6 @@
 
 </main>
 
+
 </body>
-<html>
+</html>

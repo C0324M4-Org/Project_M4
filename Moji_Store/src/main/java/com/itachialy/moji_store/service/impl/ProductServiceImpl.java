@@ -6,6 +6,8 @@ import com.itachialy.moji_store.repository.IProductRepository;
 import com.itachialy.moji_store.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +29,11 @@ public class ProductServiceImpl implements IProductService {
         this.iProductRepository = iProductRepository;
     }
 
+
+    @Override
+    public Page<Product> findAll(Pageable pageable) {
+        return iProductRepository.findAll(pageable);
+    }
 
     @Override
     public List<Product> findAll() {
