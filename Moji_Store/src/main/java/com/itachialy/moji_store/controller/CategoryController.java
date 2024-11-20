@@ -28,7 +28,9 @@ public class CategoryController {
     @GetMapping("show-create")
     public String showCreate(Model model) {
         model.addAttribute("categories", new Category());
+
         return "/category/show_create";
+
     }
 
 
