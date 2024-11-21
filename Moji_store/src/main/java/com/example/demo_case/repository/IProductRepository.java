@@ -1,9 +1,0 @@
-package com.example.demo_case.repository;
-
-import com.example.demo_case.model.Product;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface IProductRepository extends JpaRepository<Product,Long> {
-}
