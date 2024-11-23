@@ -28,6 +28,4 @@ public class AdminControlller {
 //        model.addAttribute("products",iProductService.findAll());
 //        return "";
 //    }
-
-
 }

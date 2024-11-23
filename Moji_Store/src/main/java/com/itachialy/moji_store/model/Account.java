@@ -32,6 +32,9 @@ public class Account {
     )
     private List<Role> roles = new ArrayList<>();
 
+    //deleted == true => cannot login
+    private boolean deleted = false;
+
     public Account(String username, String fullName, String gender, LocalDate dob, String email, String password, List<Role> roles) {
         this.username = username;
         this.fullName = fullName;
@@ -110,5 +113,11 @@ public class Account {
     }
 
 
+    public boolean isDeleted() {
+        return deleted;
+    }
 
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }
