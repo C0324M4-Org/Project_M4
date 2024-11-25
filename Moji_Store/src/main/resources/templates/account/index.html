@@ -22,7 +22,7 @@
                   class="d-flex justify-content-end align-items-center">
                 <div class="mx-1">
                     <select name="roleName" id="roleName" class="form-control">
-                        <option th:value="ALL" th:text="ALL" th:selected="${roleName == 'ALL'?true:false}"></option>
+                        <option th:value="ALL" th:selected="${roleName == 'ALL'?true:false}">Tất cả</option>
                         <option th:each="r : ${roles}" th:value="${r.name}" th:text="${r.name}"
                                 th:selected="${roleName == r.name?true:false}"></option>
                     </select>
