@@ -20,7 +20,7 @@ public class AdminControlller {
     @GetMapping("")
     public String showControlPanel(Model model){
         model.addAttribute("list", iProductService.findAll());
-        return "/product/home_admin";
+        return "/admin/home_admin";
     }
 
 //    @GetMapping("/product_manage")
