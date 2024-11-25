@@ -33,6 +33,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid email or username");
         }
+        if(user.isDeleted()){
+            throw new UsernameNotFoundException("Your account is blocked");
+        }
 
         List<SimpleGrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 

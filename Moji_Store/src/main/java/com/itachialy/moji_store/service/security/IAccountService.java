@@ -3,7 +3,9 @@ package com.itachialy.moji_store.service.security;
 import com.itachialy.moji_store.model.Account;
 import org.springframework.stereotype.Service;
 
-@Service
+import java.util.List;
+
+
 public interface IAccountService {
     Account findUserByEmail(String email);
     Account findByUsername(String username);
