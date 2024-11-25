@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin giao hàng - Moji Store</title>
+    <link rel="stylesheet" href="/css/home-page.css"> <!-- Ensure this path is correct -->
+    <link rel="stylesheet" href="https://web.nvnstatic.net/css/bootstrap/bootstrap.4.3.1.min.css?v=2" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="logo text-center my-4">Moji Store</div>
+    <div class="breadcrumb">
+        <a href="/cart">Giỏ hàng</a> &gt; Thông tin giao hàng
+    </div>
+
+    <h1>Thông tin giao hàng</h1>
+
+    <!-- User Info Section -->
+    <div class="user-info mb-4">
+        <div class="user-avatar"></div>
+        <div>
+            <span class="user-name" th:text="${account.fullName}">Khoa Huỳnh</span>
+            (<span th:text="${account.email}">khoabkdn2003@gmail.com</span>)
+        </div>
+    </div>
+
+    <!-- Checkout Form -->
+    <form th:action="@{/cart/checkout}" method="post"> <!-- Ensure this action is correctly mapped in your controller -->
+        <input type="hidden" name="username" th:value="${account.username}" />
+
+        <div class="form-group">
+            <label for="fullName">Họ và tên:</label>
+            <input type="text" id="fullName" name="fullName" class="form-control" th:value="${account.fullName}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Số điện thoại:</label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Nhập số điện thoại" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Địa chỉ giao hàng:</label>
+            <input type="text" id="address" name="address" class="form-control" placeholder="Nhập địa chỉ giao hàng" required>
+        </div>
+
+        <!-- Pickup Option -->
+        <div class="pickup-option mb-3">
+            <input type="checkbox" id="pickup" name="pickupOption">
+            <label for="pickup">Nhận tại cửa hàng</label>
+        </div>
+
+        <!-- Payment Method Section -->
+        <h2>Phương thức thanh toán</h2>
+        <div class="payment-option mb-3">
+            <input type="radio" id="cod" name="paymentMethod" value="COD" checked>
+            <label for="cod">Thanh toán khi nhận hàng (COD)</label>
+        </div>
+
+        <!-- VNPay Payment Option -->
+        <div class="payment-option mb-3">
+            <input type="radio" id="vnpay" name="paymentMethod" value="VNPAY">
+            <label for="vnpay">Thanh toán qua VNPAY</label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type='submit' class='btn btn-success'>Xác nhận đơn hàng</button>
+
+    </form>
+
+    <!-- Footer Section -->
+    <footer class='mt-5 text-center'>
+        © 2024 Moji Store. All rights reserved.
+    </footer>
+
+</div>
+
+<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</body>
+</html>
