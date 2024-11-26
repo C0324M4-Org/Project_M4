@@ -1,4 +1,4 @@
-package com.itachialy.moji_store.service.security;
+package com.itachialy.moji_store.service;
 
 import com.itachialy.moji_store.model.Role;
 import org.springframework.stereotype.Service;

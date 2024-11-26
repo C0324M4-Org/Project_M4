@@ -4,13 +4,12 @@ import com.itachialy.moji_store.model.Account;
 import com.itachialy.moji_store.model.Role;
 import com.itachialy.moji_store.repository.IAccountRepository;
 import com.itachialy.moji_store.repository.IRoleRepository;
-import com.itachialy.moji_store.service.security.IAccountService;
+import com.itachialy.moji_store.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.List;
 
 
 @Service
