@@ -11,16 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserController {
     @Autowired
-    private IAccountService accountService;  // Dịch vụ để lấy thông tin người dùng
-
+    private IAccountService accountService;
     @GetMapping("/profile")
     public String viewProfile(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-
         Account account = accountService.findByUsername(username);
-
         model.addAttribute("account", account);
-
         return "user/profile";
     }
 }
