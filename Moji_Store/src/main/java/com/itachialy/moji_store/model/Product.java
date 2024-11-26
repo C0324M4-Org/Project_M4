@@ -1,22 +1,32 @@
 package com.itachialy.moji_store.model;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
+import java.util.List;
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String description;
     private int price;
+
+    // Đảm bảo khai báo thuộc tính image
     @Column(name = "image")
     private String image;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
-    Category category;
+    private Category category;
 
-    public Product() {
+    // Getters và Setters
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Long getId() {
@@ -35,20 +45,20 @@ public class Product {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getPrice() {
         return price;
     }
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public Category getCategory() {
@@ -59,12 +69,6 @@ public class Product {
         this.category = category;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    // Các getter và setter khác...
 }
 

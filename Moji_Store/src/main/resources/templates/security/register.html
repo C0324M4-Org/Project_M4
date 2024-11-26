@@ -93,9 +93,9 @@
             <div class="required-field">
                 <select class="form-control" name="gender" >
                     <option value="" disabled selected>Chọn giới tính...</option>
-                    <option value="Nam" th:selected="${registerDTO.gender == 'Nam'}">Nam</option>
-                    <option value="Nữ" th:selected="${registerDTO.gender == 'Nữ'}">Nữ</option>
-                    <option value="Khác" th:selected="${registerDTO.gender == 'Khác'}">Khác</option>
+                    <option value="Male" th:selected="${registerDTO.gender == 'Male'}">Nam</option>
+                    <option value="Female" th:selected="${registerDTO.gender == 'Female'}">Nữ</option>
+                    <option value="Other" th:selected="${registerDTO.gender == 'Other'}">Khác</option>
                 </select>
                 <div th:if="${#fields.hasErrors('gender')}" class="text-danger" th:errors="*{gender}"></div>
             </div>

@@ -91,11 +91,11 @@
                 <a th:href="@{/login}" class="tab active" data-tab="login">ĐĂNG NHẬP</a>
                 <a th:href="@{/register-form}" class="tab" data-tab="register">ĐĂNG KÝ</a>
             </div>
-            <div class="alert alert-danger" th:if="${errorMessage}">
-                <p th:text="${errorMessage}"></p>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid Email or Password !!!</div>
             </div>
-            <div class="alert alert-success" th:if="${logoutMessage}">
-                <p th:text="${logoutMessage}"></p>
+            <div th:if="${param.logout}">
+                <div class="alert alert-success">You have been logged out !!!</div>
             </div>
 
             <form id="loginForm" class="form active" method="post" role="form"

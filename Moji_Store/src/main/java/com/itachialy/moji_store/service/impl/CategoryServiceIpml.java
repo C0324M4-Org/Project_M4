@@ -4,8 +4,7 @@ import com.itachialy.moji_store.repository.ICategoryRepository;
 import com.itachialy.moji_store.repository.IProductRepository;
 import com.itachialy.moji_store.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.Optional;
 
 
 @Service
+@Primary
 public class CategoryServiceIpml implements ICategoryService {
     private final ICategoryRepository iCategoryRepository;
     private final IProductRepository iProductRepository;
@@ -24,13 +24,13 @@ public class CategoryServiceIpml implements ICategoryService {
     }
 
     @Override
-    public Page<Category> findAll(Pageable pageable) {
-        return iCategoryRepository.findAll(pageable);
+    public List<Category> findAll() {
+        return iCategoryRepository.findAll();
     }
 
     @Override
-    public List<Category> findAll() {
-        return iCategoryRepository.findAll();
+    public void save(Category category) {
+
     }
 
     @Override
@@ -42,13 +42,23 @@ public class CategoryServiceIpml implements ICategoryService {
         iCategoryRepository.save(category);
     }
 
+    public static class CannotDeleteCategoryException extends RuntimeException {
+        public CannotDeleteCategoryException(String message) {
+            super(message);
+        }
+    }
 
     @Override
-    public void deleteCat(Long id) throws Exception {
+    public void deleteCat(Long id) {
         if (iProductRepository.existsByCategoryId(id)) {
-            throw new Exception("Không thể xóa mục này vì vẫn còn sản phẩm đang liên kết.");
+            throw new CannotDeleteCategoryException("Không thể xóa mục này");
         }
         iCategoryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Category> getAllCategories() {
+        return List.of();
     }
 
 }

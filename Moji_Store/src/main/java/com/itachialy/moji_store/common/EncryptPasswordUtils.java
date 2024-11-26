@@ -9,6 +9,7 @@ public class EncryptPasswordUtils {
         return encoder.encode(password);
     }
 
+
     public static Boolean ParseEncrypt(String password, String currentPassword) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.matches(currentPassword, password);

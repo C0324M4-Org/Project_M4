@@ -1,6 +1,5 @@
 package com.itachialy.moji_store.service.security;
 
-import com.itachialy.moji_store.exception.AccountBlockedException;
 import com.itachialy.moji_store.model.Account;
 import com.itachialy.moji_store.repository.IAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,23 +23,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-        Account account ;
+        Account user;
         // check email hoac user
         if (usernameOrEmail.contains("@")) {
-            account = iAccountRepository.findByEmail(usernameOrEmail);
+            user = iAccountRepository.findByEmail(usernameOrEmail);
         } else {
-            account = iAccountRepository.findByUsername(usernameOrEmail);
+            user = iAccountRepository.findByUsername(usernameOrEmail);
         }
-        if (account == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid email or username");
         }
-        if (account.isDeleted()) {
-            throw new AccountBlockedException("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.");
-        }
 
-        List<SimpleGrantedAuthority> authorities = account.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+        List<SimpleGrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 
-        return new User(account.getUsername(), account.getPassword(), authorities);
+        return new User(user.getUsername(), user.getPassword(), authorities);
     }
 
 }
