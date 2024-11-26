@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ - Moji Store</title>
+    <title>Home Page: </title>
     <link href="https://img.pikbest.com/png-images/20240501/spirited-mothers-day-holiday-wishes-222024-png-images-png_10542277.png!w700wp" rel="icon" type="image/png">
     <link rel="stylesheet" href="https://web.nvnstatic.net/css/bootstrap/bootstrap.4.3.1.min.css?v=2" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/css/home-page.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://pos.nvnstatic.net/cache/location.vn.js?v=241031_112511" defer></script>
     <script src="https://web.nvnstatic.net/js/lazyLoad/lazysizes.min.js" async></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 <body>
-
 <header class="header">
     <div class="header-top">
         <div class="col text-right">
@@ -29,38 +27,45 @@
             <div class="row align-center">
                 <div class="head-col-left col-lg-3 col-12">
                     <a href="/" class="logo">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH0Oa__wY2oVzrLcdA0z-BVW0FTpp9ZU5-mw&s" alt="Logo của cửa hàng">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH0Oa__wY2oVzrLcdA0z-BVW0FTpp9ZU5-mw&s" alt="Logo">
                     </a>
                 </div>
                 <div class="head-col-center col-lg-6 d-none d-lg-block">
                     <form class="form-search" action="/search" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm" required>
+                            <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm">
                             <span class="input-group-btn">
-                                <button type="submit" class="btn btn-blue"><b class="bi-search"></b></button>
-                            </span>
+                                        <button type="submit" class="btn btn-blue"><b class="bi-search"></b></button>
+                                    </span>
                         </div>
                     </form>
+                    <div class="research d-lg-block">
+                        <!--các thẻ tags phân loại-->
+                        <div th:replace="~{fragments/tags :: tags}"></div>
+                    </div>
                 </div>
-                <div class="head-col-right col-lg-3 col-12 text-end">
+                <div class="head-col-right col-lg-3 col-12">
                     <div sec:authorize="isAuthenticated()">
                         <i class="bi bi-person-circle"></i>
                         <span class="ms-2">Xin chào,
-                            <span sec:authentication="principal.username"></span></span>
+                                <span sec:authentication="principal.username"></span></span>
                         <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
                     </div>
+
                     <div sec:authorize="!isAuthenticated()" class="header-right d-flex align-items-start">
-                        <ul class="header-user d-none d-md-block list-inline mb-0">
-                            <li><a th:href="@{/login}" class='nav-link'>Đăng nhập</a></li>
-                            <li><a th:href="@{/register-form}" class='nav-link'>Đăng ký</a></li>
+                        <ul class="header-user d-none d-md-block">
+                            <li>
+                                <a th:href="@{/login}">Đăng nhập | </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/register-form}">Đăng ký</a>
+                            </li>
                         </ul>
-                        <!-- Cart Icon -->
-                        <div class="count-cart ms-3" title="Giỏ hàng">
-                            <a th:href="@{/cart}" class='nav-link'>
-                                <i class='fas fa-shopping-cart'></i>
-                                <!-- Display number of items in cart -->
-                                <span class='count d-flex align-items-center justify-content-center' th:text="${cartItemCount}">0</span>
-                            </a>
+                        <div class="count-cart" title="Giỏ hàng" style="margin-left: 10px">
+                            <div class="count-cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="count d-flex align-items-center justify-content-center">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -69,57 +74,70 @@
     </div>
 </header>
 
-<main class="mains blk-pro-cat sty-none mt-4">
+<main class="mains blk-pro-cat sty-none">
     <div class="container">
-        <!-- Product Categories -->
-        <h2>Sản phẩm nổi bật</h2>
+        <div class="row">
 
-        <!-- Product List -->
-        <div class='row'>
-            <!-- Example Product Card -->
-            <div th:each='product : ${list}' class='product-item col-lg-3 col-md-4 col-sm-6 col-12 mb-4'>
-                <div class='card h-100'>
-                    <!-- Product Image -->
-                    <img th:src="${product.image}" alt="${product.name}" class='card-img-top'>
-                    <!-- Product Details -->
-                    <div class='card-body'>
-                        <h5 th:text="${product.name}" class='card-title'></h5>
-                        <!-- Product Price -->
-                        <p th:text="'Giá: ' + ${product.price} + ' đ'" class='card-text'></p>
-
-                        <!-- Add to Cart Button -->
-                        <form th:action="@{/cart/add/{productId}(productId=${product.id})}" method='post'>
-                            <!-- Quantity Input -->
-                            <input type='number' name='quantity' value='1' min='1' style='width: 60px;' />
-                            <!-- Submit Button -->
-                            <button type='submit' class='btn btn-primary'>Thêm vào giỏ hàng</button>
-                        </form>
-
-                        <!-- View Details Button -->
-                        <a th:href="@{/product/{id}(id=${product.id})}" class='btn btn-secondary mt-2'>Xem chi tiết</a>
-                    </div>
+            <div class="col-lg-3 col-12 js-fil-bar">
+                <div class="filter-groups">
+                <!--thanh silder search giá-->
+                    <div th:replace="~{fragments/slider-price :: priceSlider}"></div>
                 </div>
             </div>
+            <div class="col-lg-9 col-12">
 
-            <!-- Repeat for more products dynamically using Thymeleaf -->
+                <div class="d-pro-head">
+                    <h5 style="color:#5d79b5">Tìm kiếm: </h5>
+                    <select onchange="window.location.href = this.value" class="form-control d-none d-xl-block">
+                        <option value="/search?q=&show=">Mới nhất</option>
+                        <option value="/search?q=&show=priceAsc">Giá tăng dần</option>
+                        <option value="/search?q=&show=priceDesc">Giá giảm dần</option>
+                        <option value="/search?q=&show=discount">Sale</option>
+                    </select>
+                </div>
+
+                <div class="product-list
+                row">
+                    <div th:each="product : ${list}" class="product-item col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+                        <div class="image">
+                            <span class="flag">New</span>
+                            <a th:href="@{/}" title="image">
+                                <img data-sizes="auto" class="lazyload" th:src="${product.image}" alt="image">
+                            </a>
+                            <div class="product-action d-flex align-items-center justify-content-center">
+                                <a href="/" class="wish" data-psId="37922850">
+                                    <i class="fas fa-heart"></i>
+                                </a>
+                                <a th:href="@{/}" class="js-add-cart" data-psId="37922850" data-root="-2">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h1 class="name">
+                            <a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}"></a>
+                        </h1>
+                        <div class="product-price">
+                            <span class="price" th:text="${product.price} + ' đ'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-block text-center mt-3">
+                    <button id="loadMore" class="btn btn-primary"
+                            th:attr="data-current-page=${currentPage}, data-total-pages=${totalPages}">
+                        Xem Thêm
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <!-- Load More Button or Pagination -->
-        <!-- Uncomment if you implement pagination -->
-        <!--
-        <div id='loadMoreContainer' th:if="${currentPage != totalPages}">
-            <button id='loadMore' data-current-page="${currentPage}" data-total-pages="${totalPages}"
-                    class='btn btn-primary mt-4'>Xem Thêm</button>
-        </div>
-        -->
-
     </div>
 </main>
+<!--thẻ footer-->
+<div th:replace="~{fragments/footer :: footer}"></div>
 
-<footer th:replace="~{fragments/footer :: footer}"></footer>
-
-<script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="//code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="/js/loading-product.js"></script>
+<script src="/js/slider-price.js"></script>
 
 </body>
 </html>

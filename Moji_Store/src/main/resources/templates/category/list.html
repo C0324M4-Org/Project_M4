@@ -1,10 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/layout::head">
+    <title>Category List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            margin: 0 2px;
+        }
+
+        .pagination {
+            justify-content: center;
+        }
+        .warning {
+            color: red;
+            font-size: 17px;
+            font-weight: bold
+        }
+
+    </style>
 </head>
 <body>
+<div th:insert="/fragments/layout::header"></div>
+<div class="container-fluid d-flex justify-content-center position-relative">
 
+
+    <div class="w-100">
+
+        <div class="py-3 w-100 text-center">
+            <h3>Danh sách Hãng</h3>
+        </div>
+        
+        <div style=" color: red;font-size: 17px;font-weight: bold">
+            <p th:text="${add}"></p>
+            <p th:text="${edit}"></p>
+            <p th:text="${error}"></p>
+            <p th:text="${del}"></p>
+        </div>
+
+
+
+        <div class="py-3 w-100 d-flex justify-content-between">
+            <a th:href="@{/admin/category/show-create}" class="btn btn-success">Thêm Hãng</a>
+            <form th:action="@{#}" method="get" class="d-flex justify-content-center">
+                <div class="input-group w-auto">
+                    <input type="text" name="categoryName" id="categoryName" class="form-control" placeholder="Tìm kiếm loại sản phẩm">
+                    <button type="submit" class="btn btn-primary input-group-append">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+
+        <table id="table" class="table-hover w-100" border="1">
+
+            <thead class="bg-warning">
+            <tr>
+                <th width="10%" class="p-2 text-center">ID</th>
+                <th width="70%" class="p-2 text-center">Tên Hãng</th>
+                <th width="20%" class="p-2 text-center">Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category, loop : ${categories}">
+                <td class="p-2 text-center" th:text="${loop.count}"></td>
+                <td class="p-2" th:text="${category.name}"></td>
+                <td class="p-2 text-center">
+
+                    <a th:href="@{/admin/category/show-edit/{id}(id=${category.id})}" class="btn btn-warning">Sửa</a>
+                    <form th:action="@{/admin/category/delete-cat/{id}(id=${category.id})}" method="post"
+                          style="display: inline;">
+                        <input type="hidden" name="id" th:value="${category.id}">
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation" class="py-3">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${page.currentPage == 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/admin/category(page=${page.currentPage - 1})}">Trước</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(1, page.totalPages)}"
+                    th:classappend="${i == page.currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{/admin/category(page=${i})}" th:text="${i}"></a>
+                </li>
+                <li class="page-item" th:classappend="${page.currentPage == page.totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{/admin/category(page=${page.currentPage + 1})}">Sau</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
 </body>
 </html>
