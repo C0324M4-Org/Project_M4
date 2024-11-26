@@ -1,6 +1,7 @@
 package com.itachialy.moji_store.service;
 
 import com.itachialy.moji_store.model.Product;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,4 +14,6 @@ public interface IProductService {
     Optional<Product> findById(Long id);
     void save(Product product);
     void deleteById(Long id);
+
+    void addProduct(@Valid Product product);
 }
