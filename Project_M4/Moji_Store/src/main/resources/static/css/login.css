@@ -1,0 +1,178 @@
+
+/*---- header -----------------------------------------------*/
+.header-top{
+    padding: 5px 0;
+    background: #aededc;
+}
+.header-top p{
+    display: inline-block;
+    margin: 0;
+}
+.header-top a{
+    font-size: 15px;
+    color: #3c6383;
+    padding: 0 15px;
+    display: inline-block;
+    font-weight: 700;
+}
+.header-top a:hover{
+    color: #5899c4;
+}
+
+
+.header-content{
+    padding: 15px 0;
+}
+.header-content .logo img{
+    max-width: 100%;
+    max-height: 60px;
+}
+.js-menu-svg{
+    position: absolute;
+    top: 10px;
+    left: 15px;
+
+}
+
+.btn-blue{
+    background-color:#aededc;
+}
+
+
+
+.header-user li{
+    display: inline-block;
+}
+.header-user li a{
+    display: inline-block;
+    padding: 0 5px;
+    color: #3c6aa2;
+    font-size: 15px;
+}
+.header-user li:last-child a{
+    padding-left: 0;
+}
+.header-user li a:hover{
+    color: #71a0b5;
+}
+
+.count-cart-icon {
+    position: relative;
+    display: inline-block;
+}
+.count-cart-icon .fa-shopping-cart {
+    font-size: 20px;
+    color: rgb(79, 121, 205);
+}
+.count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: rgb(107, 195, 215);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+
+.research{
+    margin-top: 3px;
+    text-align: center;
+}
+.research p{
+    display: inline-block;
+    margin-bottom: 0;
+}
+.research a{
+    font-size: 14px;
+    color: #000000;
+    padding: 0 5px;
+    display: inline-block;
+}
+.research a:hover{
+    color: #5d79b5;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #3995c0;
+}
+
+.required-field { margin-bottom: 15px; /* Khoảng cách giữa các trường */ }
+.tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    color: #3995c0;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.tab.active {
+    border-bottom: 2px solid #3995c0;
+}
+
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color:#3995c0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 16px 0;
+}
+
+.forgot-password {
+    text-align: center;
+    margin: 16px 0;
+}
+
+.forgot-password a {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+.required-field {
+    position: relative;
+}
+
+.required-message {
+    display: none;
+    position: absolute;
+    top: -20px;
+    right: 0;
+    color: red;
+    font-size: 12px;
+}
+
