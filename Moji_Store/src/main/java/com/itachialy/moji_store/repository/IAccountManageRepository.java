@@ -9,4 +9,5 @@ public interface IAccountManageRepository {
     Account findById(Long id);
     List<Account> findByRoleName(String roleName);
     void deactive(Long id);
+    int countAll();
 }

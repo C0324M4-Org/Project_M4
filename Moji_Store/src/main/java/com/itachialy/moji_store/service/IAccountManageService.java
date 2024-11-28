@@ -9,4 +9,5 @@ public interface IAccountManageService {
     List<Account> findByRoleName(String roleName);
     void deactive(Long id);
     Account findById(Long id);
+    int countAll();
 }

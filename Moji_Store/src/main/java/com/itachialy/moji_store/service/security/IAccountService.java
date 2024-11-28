@@ -12,4 +12,6 @@ public interface IAccountService {
     void save(Account account);
     boolean existsByEmail(String email);
     boolean existsByUsername(String username);
+    Account findByUsernameOrEmail(String email, String username);
+    Account findByUsernameOrEmail(String emailOrUsername);
 }

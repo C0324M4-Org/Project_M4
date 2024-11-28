@@ -19,6 +19,9 @@ public class Account {
     private String gender;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;
+    @Column(length = 10)
+    private String phone;
+    private String address;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -35,11 +38,13 @@ public class Account {
     //deleted == true => cannot login
     private boolean deleted = false;
 
-    public Account(String username, String fullName, String gender, LocalDate dob, String email, String password, List<Role> roles) {
+    public Account(String username, String fullName, String gender, LocalDate dob, String phone, String address, String email, String password, List<Role> roles) {
         this.username = username;
         this.fullName = fullName;
         this.gender = gender;
         this.dob = dob;
+        this.phone = phone;
+        this.address = address;
         this.email = email;
         this.password = password;
         this.roles = roles;
@@ -119,5 +124,21 @@ public class Account {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

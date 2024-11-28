@@ -11,10 +11,10 @@
     </style>
 </head>
 <body>
-<div th:insert="/fragments/layout::header"></div>
+<div th:insert="/fragments/layout::admin-header"></div>
 <div class="container-fluid d-flex justify-content-center position-relative">
-    <div class="w-100">
-        <div class="py-3 w-100 text-center">
+    <div class="w-100 pt-5">
+        <div class="py-5 w-100 text-center">
             <h3>Danh sách tài khoản</h3>
         </div>
         <div class="py-3 w-100 ">
@@ -35,7 +35,7 @@
                 </div>
             </form>
         </div>
-        <table id="table" class="table-hover w-100" border="1">
+        <table id="table" class="table-hover table-bordered w-100">
             <thead class="bg-warning">
             <tr>
                 <th width="2%" class="p-2 text-center" rowspan="2">#</th>

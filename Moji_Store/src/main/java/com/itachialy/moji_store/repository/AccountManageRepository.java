@@ -47,4 +47,9 @@ public class AccountManageRepository implements IAccountManageRepository {
         account.setDeleted(!account.isDeleted());
         em.merge(account);
     }
+
+    @Override
+    public int countAll() {
+        return em.createQuery("select a from Account a", Account.class).getResultList().size();
+    }
 }
