@@ -20,6 +20,7 @@ public class Bill {
     @OneToMany(mappedBy = "bill")
     private List<BillItem> billItems = new ArrayList<>();
 
+    private int totalBill;
     private String note = "";
 
     private LocalDateTime created_at = LocalDateTime.now();
@@ -28,9 +29,10 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Account account, List<BillItem> billItems, String note) {
+    public Bill(Account account, List<BillItem> billItems, int totalBill, String note) {
         this.account = account;
         this.billItems = billItems;
+        this.totalBill = totalBill;
         this.note = note;
     }
 
@@ -80,5 +82,13 @@ public class Bill {
 
     public void setUpdated_at(LocalDateTime updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public int getTotalBill() {
+        return totalBill;
+    }
+
+    public void setTotalBill(int totalBill) {
+        this.totalBill = totalBill;
     }
 }

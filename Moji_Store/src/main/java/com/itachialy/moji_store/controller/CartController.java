@@ -111,6 +111,8 @@ public class CartController {
     public String payment(@RequestParam String note, Model model) {
         List<CartItem> cartItems = cartService.getCart(cartService.findCartByAccount(this.getCurrentUser()));
         Bill newBill = new Bill();
+        int totalBill = 0;
+
         newBill.setAccount(this.getCurrentUser());
         newBill.setNote(note);
         List<BillItem> list = new ArrayList<>();
@@ -118,6 +120,7 @@ public class CartController {
         for (CartItem cartItem : cartItems) {
 //            Bill item moi da den
             BillItem newBillItem = new BillItem();
+            totalBill += cartItem.getQuantity() * cartItem.getProduct().getPrice();
 
             newBillItem.setBill(newBill);
             newBillItem.setQuantity(cartItem.getQuantity());
@@ -126,6 +129,7 @@ public class CartController {
             billService.saveBillItem(newBillItem);
             list.add(newBillItem);
         }
+        newBill.setTotalBill(totalBill);
         newBill.setBillItems(list);
         billService.saveBill(newBill);
         cartService.clearCart(cartItems.get(0).getCart());
