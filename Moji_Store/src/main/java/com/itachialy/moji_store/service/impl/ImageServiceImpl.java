@@ -18,8 +18,8 @@ public class ImageServiceImpl {
         return iImageRepository.findAll();
     }
 
-    public void addProductImage(Image productImage) {
-        iImageRepository.save(productImage);
+    public void addProductImage(Image Image) {
+        iImageRepository.save(Image);
     }
 
 }

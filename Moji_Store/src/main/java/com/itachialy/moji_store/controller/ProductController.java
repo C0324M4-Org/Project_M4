@@ -51,6 +51,6 @@ public class ProductController {
     public String showCreateForm(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("categories", categoryService.getAllCategories()); // Nếu có danh mục
-        return "products/create"; // Tên file HTML (products/create.html)
+        return "product/create"; // Tên file HTML (products/create.html)
     }
 }

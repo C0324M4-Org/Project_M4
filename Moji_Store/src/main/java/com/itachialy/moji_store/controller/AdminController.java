@@ -143,5 +143,29 @@ public class AdminController {
         Path pathFileUpload = dirImages.resolve(newFileName);
         Files.copy(image.getInputStream(), pathFileUpload, StandardCopyOption.REPLACE_EXISTING);
         return newFileName;
-    }
+  }
+//    @PostMapping("/products/edit/{id}")
+//    public String editProduct(@PathVariable Long id,
+//                              @Valid @ModelAttribute Product product,
+//                              BindingResult result,
+//                              @RequestParam("imageFile") MultipartFile imageFile) {
+//        if (result.hasErrors()) {
+//            return "product/edit"; // Return to form if there are validation errors
+//        }
+//
+//        try {
+//            if (!imageFile.isEmpty()) {
+//                String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+//                Path uploadPath = Paths.get("uploads/images");
+//                Files.createDirectories(uploadPath);
+//                Files.copy(imageFile.getInputStream(), uploadPath.resolve(fileName));
+//                product.setImage("/img/" + fileName);
+//            }
+//            productService.save(product); // Save the updated product
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return "redirect:/admin"; // Redirect back to product list
+//    }
 }
