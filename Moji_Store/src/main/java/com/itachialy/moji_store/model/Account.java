@@ -15,8 +15,11 @@ public class Account {
     private Long id;
     @Column(nullable = false, unique = true)
     private String username;
+    private String avatar;
     private String fullName;
     private String gender;
+    private String address;
+    private int phoneNumber;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;
 
@@ -32,14 +35,22 @@ public class Account {
     )
     private List<Role> roles = new ArrayList<>();
 
-    public Account(String username, String fullName, String gender, LocalDate dob, String email, String password, List<Role> roles) {
+    //deleted == true => cannot login
+    private boolean deleted = false;
+
+    public Account(Long id, String username, String avatar, String fullName, String gender, String address, int phoneNumber, LocalDate dob, String email, String password, List<Role> roles, boolean deleted) {
+        this.id = id;
         this.username = username;
+        this.avatar = avatar;
         this.fullName = fullName;
         this.gender = gender;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
         this.dob = dob;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.deleted = deleted;
     }
 
     public Account() {
@@ -109,6 +120,35 @@ public class Account {
         this.roles = roles;
     }
 
+    public String getAddress() {
+        return address;
+    }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

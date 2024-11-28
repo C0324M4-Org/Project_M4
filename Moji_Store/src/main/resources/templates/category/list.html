@@ -1,148 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý loại sản phẩm</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/layout::head">
+    <title>Category List</title>
     <style>
-        body {
-            display: flex;
-            height: 100vh;
-            background-color: #f8f9fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .sidebar {
-            width: 250px;
-            background-color: #ffffff;
-            padding: 15px;
-            border-right: 1px solid #dee2e6;
+
+        .btn {
+            margin: 0 2px;
         }
-        .sidebar input {
-            margin-bottom: 15px;
-        }
-        .sidebar a {
-            text-decoration: none;
-            color: #000;
-            margin-bottom: 10px;
-            display: block;
-            font-size: 16px;
-        }
-        .sidebar a:hover {
-            text-decoration: underline;
-        }
-        .main-content {
-            flex: 1;
-            padding: 20px;
+
+        .pagination {
+            justify-content: center;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
-<div class="sidebar">
-    <input type="text" class="form-control mb-3" placeholder="Search...">
-    <a href="#">Quản lý loại sản phẩm</a>
-    <a href="#">Quản lý sản phẩm</a>
-    <a href="#">Quản lý người dùng</a>
-    <a href="#">Quản lý đơn hàng</a>
-    <a href="#">Quản lý thống kê</a>
-</div>
-<div class="main-content">
-    <h2>Quản lý loại sản phẩm</h2>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="list-tab" data-bs-toggle="tab" data-bs-target="#list" type="button" role="tab">List</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button" role="tab">Edit</button>
-        </li>
-    </ul>
-    <div class="tab-content mt-3" id="myTabContent">
-        <!-- List Tab -->
-        <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
-            <table id="productTable" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Tên loại</th>
-                    <th>Tên hàng</th>
-                    <th>Thao tác</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Điện thoại</td>
-                    <td>OPPO</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Điện thoại</td>
-                    <td>SAMSUNG</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Điện thoại</td>
-                    <td>OPPO</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-                <!-- Thêm các hàng khác nếu cần -->
-                </tbody>
-            </table>
+<div th:insert="/fragments/layout::header"></div>
+<div class="container-fluid d-flex justify-content-center position-relative">
+
+
+    <div class="w-100">
+
+        <div class="py-3 w-100 text-center">
+            <h3>Danh sách Hãng</h3>
         </div>
-        <!-- Edit Tab -->
-        <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
-            <form>
-                <div class="mb-3">
-                    <label for="productId" class="form-label">ID</label>
-                    <input type="text" class="form-control" id="productId" placeholder="Nhập ID sản phẩm">
+        
+        <div style=" color: red;font-size: 17px;font-weight: bold">
+            <p th:text="${add}"></p>
+            <p th:text="${edit}"></p>
+            <p th:text="${error}"></p>
+            <p th:text="${del}"></p>
+        </div>
+
+
+
+        <div class="py-3 w-100 d-flex justify-content-between">
+            <a th:href="@{/admin/category/show-create}" class="btn btn-success">Thêm Hãng</a>
+            <form th:action="@{#}" method="get" class="d-flex justify-content-center">
+                <div class="input-group w-auto">
+                    <input type="text" name="categoryName" id="categoryName" class="form-control" placeholder="Tìm kiếm loại sản phẩm">
+                    <button type="submit" class="btn btn-primary input-group-append">Tìm kiếm</button>
                 </div>
-                <div class="mb-3">
-                    <label for="productType" class="form-label">Tên loại</label>
-                    <input type="text" class="form-control" id="productType" placeholder="Nhập loại sản phẩm">
-                </div>
-                <div class="mb-3">
-                    <label for="productName" class="form-label">Tên hàng</label>
-                    <input type="text" class="form-control" id="productName" placeholder="Nhập tên hàng">
-                </div>
-                <button type="submit" class="btn btn-success">Lưu</button>
             </form>
         </div>
+
+        <table id="table" class="table-hover w-100" border="1">
+
+            <thead class="bg-warning">
+            <tr>
+                <th width="10%" class="p-2 text-center">ID</th>
+                <th width="80%" class="p-2 text-center">Tên Hãng</th>
+                <th width="10%" class="p-2 text-center">Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(categories)}">
+                <td colspan="7" class="text-center" style="font-weight: bold; color: #f55656;">
+                    Danh sách loại sản phẩm đang trống
+                </td>
+            </tr>
+            
+            <tr th:each="category, loop : ${categories}">
+                <td class="p-2 text-center" th:text="${loop.count}"></td>
+                <td class="p-2" th:text="${category.name}"></td>
+                <td class="p-2 text-center">
+
+                    <a th:href="@{/admin/category/show-edit/{id}(id=${category.id})}" class="btn btn-warning">Sửa</a>
+<!--                    <form th:action="@{/admin/category/delete-cat/{id}(id=${category.id})}" method="post"-->
+<!--                          style="display: inline;">-->
+<!--                        <input type="hidden" name="id" th:value="${category.id}">-->
+<!--                        <button type="submit" class="btn btn-danger"-->
+<!--                                th:data="|Bạn có muốn xóa loại sản phẩm ${category.name}|"-->
+<!--                                onclick="return confirm(this.getAttribute('data'));">Xóa-->
+<!--                        </button>-->
+<!--                    </form>-->
+                    <form th:action="@{/admin/category/delete/{id}(id=${category.id})}" method="get" style="display: inline;">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                th:data-id="${category.id}" th:data-name="${category.name}">Xóa
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation" class="py-3">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/admin/category(page=${currentPage - 1})}">Trước</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"
+                    th:classappend="${i == currentPage} ? 'active'">
+                    <a class="page-link" th:href="@{/admin/category(page=${i})}" th:text="${i}"></a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                    <a class="page-link" th:href="@{/admin/category(page=${currentPage + 1})}">Sau</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<!-- DataTables JS -->
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#productTable').DataTable({
-            language: {
-                search: "Tìm kiếm:",
-                lengthMenu: "Hiển thị _MENU_ mục",
-                info: "Hiển thị _START_ đến _END_ của _TOTAL_ mục",
-                paginate: {
-                    previous: "Trước",
-                    next: "Tiếp"
-                }
-            }
-        });
-    });
-</script>
+
+<!-- Modal Xóa -->
+<div th:replace="/fragments/modal-delete :: modal-delete"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/modal-delete-ctgr.js"></script>
 </body>
 </html>

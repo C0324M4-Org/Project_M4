@@ -15,8 +15,8 @@ import java.util.List;
 
 @Component
 public class DataSeedingListener implements ApplicationListener<ContextRefreshedEvent> {
-    private IAccountRepository iAccountRepository;
-    private IRoleRepository iRoleRepository;
+    private final IAccountRepository iAccountRepository;
+    private final IRoleRepository iRoleRepository;
 
     @Autowired
     public DataSeedingListener(IAccountRepository iAccountRepository, IRoleRepository iRoleRepository) {

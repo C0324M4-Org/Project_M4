@@ -5,34 +5,45 @@ import jakarta.persistence.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+    private Long idProduct;
+    private String nameProduct;
     private String description;
     private int price;
-    @Column(name = "image")
-    private String image;
 
+    private String modelType;
+    private String imageProduct;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     Category category;
 
+
     public Product() {
     }
 
-    public Long getId() {
-        return id;
+
+
+    public String getModelType() {
+        return modelType;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setModelType(String modelType) {
+        this.modelType = modelType;
     }
 
-    public String getName() {
-        return name;
+    public Long getIdProduct() {
+        return idProduct;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIdProduct(Long id) {
+        this.idProduct = id;
+    }
+
+    public String getNameProduct() {
+        return nameProduct;
+    }
+
+    public void setNameProduct(String name) {
+        this.nameProduct = name;
     }
 
     public int getPrice() {
@@ -43,12 +54,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageProduct() {
+        return imageProduct;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageProduct(String image) {
+        this.imageProduct = image;
     }
 
     public Category getCategory() {

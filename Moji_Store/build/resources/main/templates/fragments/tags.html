@@ -7,22 +7,21 @@
 <body>
 <div th:fragment="tags">
     <p>
-        <a href="/search?q=Capybara">
+        <a th:href="@{/search/resin}">
             <span>Mô hình RESIN</span>
         </a>
         <span></span>
-        <a href="/giang-sinh-pc250722.html">
+        <a th:href="@{/search/gundam}">
             <span>Mô hình GUNDAM</span>
         </a>
         <span></span>
-        <a href="/blindbox-pc565467.html">
+        <a th:href="@{/search/pvc}">
             <span>Mô hình PVC</span>
         </a>
         <span></span>
-        <a href="/search?q=%C4%90%C3%A8n+ng%E1%BB%A7">
-            <span>Đơn hàng trước</span>
+        <a th:href="@{/search/nendroi}">
+            <span>Mô hình Nendoroid</span>
         </a>
-
     </p>
 </div>
 </body>

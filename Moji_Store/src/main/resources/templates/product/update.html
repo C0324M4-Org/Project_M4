@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh Sửa Sản Phẩm</title>
+    <link href="https://img.pikbest.com/png-images/20240501/spirited-mothers-day-holiday-wishes-222024-png-images-png_10542277.png!w700wp" rel="icon" type="image/png">
+    <!-- Link Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Chỉnh Sửa Sản Phẩm</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Chỉnh Sửa Sản Phẩm</h2>
+
+    <div class="alert alert-danger" th:if="${error}">
+        <span th:text="${error}"></span>
+    </div>
+
+    <form th:action="@{/admin/update/{id}(id=${products.idProduct})}" method="post" th:object="${products}" enctype="multipart/form-data" class="mt-4">
+        <div class="mb-3">
+            <label for="name" class="form-label">Tên Sản Phẩm</label>
+            <input type="text" id="name" th:field="*{nameProduct}" class="form-control" placeholder="Nhập tên sản phẩm" required>
+        </div>
+a
+        <div class="mb-3">
+            <label for="description" class="form-label">Mô Tả</label>
+            <textarea id="description" th:field="*{description}" class="form-control" rows="3" placeholder="Nhập mô tả sản phẩm" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Giá</label>
+            <input type="number" id="price" th:field="*{price}" class="form-control" placeholder="Nhập giá sản phẩm" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="mainImage" class="form-label">Hình ảnh:</label>
+            <input type="file" class="form-control" multiple accept="image/*" id="mainImage" name="image" placeholder="Chọn hình ảnh mới">
+        </div>
+
+
+        <div class="mb-3">
+            <label for="modelType" class="form-label">Loại mô hình</label>
+            <select  id="modelType" name="modelType" class="form-select" required>
+                <option value="" disabled selected >Chọn loại mô hình</option>
+                <option value="GUNDAM" th:selected="${products.modelType} == 'GUNDAM'">Gundam</option>
+                <option value="NENDROI" th:selected="${products.modelType} == 'NENDROI'">Nendoroid</option>
+                <option value="FIGMA" th:selected="${products.modelType} == 'FIGMA'">Figma</option>
+                <option value="POP" th:selected="${products.modelType} == 'POP'">POP</option>
+                <option value="PVC" th:selected="${products.modelType} == 'PVC'">Nhựa PVC</option>
+                <option value="Resin" th:selected="${products.modelType} == 'Resin'">Nhựa Resin</option>
+                <option value="ABS" th:selected="${products.modelType} == 'ABS'">Nhựa ABS</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Danh Mục</label>
+            <select id="category" th:field="*{category}" class="form-select" required>
+                <option value="" disabled selected>Chọn hãng</option>
+                <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+            </select>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Cập Nhật</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -81,21 +81,31 @@
     justify-content: space-between;
     align-items: center;
 }
-
-/* Màu chữ cho từng loại card */
-.card.bg-primary .card-footer {
-    color: #0D6EFD; /* Màu chữ trắng cho card có nền màu primary */
+.card.bg-primary .card-footer a {
+    color: #0D6EFD; /* Màu chữ mặc định */
+    text-decoration: none;
+}
+.card.bg-primary .card-footer a:hover {
+    color: #ff316f; /* Màu cho card có nền màu primary */
 }
 
 .card.bg-success .card-footer {
     color: #198754; /* Màu chữ trắng cho card có nền màu success */
+    text-decoration: none;
+
 }
 
-.card.bg-warning .card-footer {
+.card.bg-warning .card-footer a {
     color: #FFC107; /* Màu chữ đen cho card có nền màu warning */
+    text-decoration: none;
+
+}
+.card.bg-warning .card-footer a:hover {
+    color: #24a6ff; /* Màu chữ hover cho card có nền màu warning */
 }
 
 .card.bg-danger .card-footer {
+    text-decoration: none;
     color: #DC3545; /* Màu chữ trắng cho card có nền màu danger */
 }
 

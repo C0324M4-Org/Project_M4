@@ -1,5 +1,6 @@
 package com.itachialy.moji_store.config;
 
+import com.itachialy.moji_store.common.CustomAuthenticationFailureHandler;
 import com.itachialy.moji_store.common.CustomAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,10 +18,15 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SpringSecurity {
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
     @Autowired
-    public SpringSecurity(CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
+    public SpringSecurity(CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler, CustomAuthenticationFailureHandler customAuthenticationFailureHandler) {
         this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
+        this.customAuthenticationFailureHandler = customAuthenticationFailureHandler;
     }
+
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -40,11 +46,14 @@ public class SpringSecurity {
                         .loginPage("/login")
                         .loginProcessingUrl("/perform_login")
                         .successHandler(customAuthenticationSuccessHandler)
+                        .failureHandler(customAuthenticationFailureHandler)  // Sử dụng custom failure handler
+//                        .failureUrl("/login?error=true")
+
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/login?logout=true")
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)

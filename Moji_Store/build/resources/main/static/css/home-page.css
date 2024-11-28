@@ -35,7 +35,6 @@
 .product-action .wish i,
 .product-action .js-add-cart i {
     font-size: 20px;
-    margin: 0 10px;
     color: gray;
 }
 .product-action .wish i.active,
@@ -202,7 +201,8 @@
 }
 
 .product-action .js-add-cart{
-    margin-left: 15px;
+    margin-left: 18px;
+    margin-top: 10px;
     width: 23px;
     height: 29px;
 }
