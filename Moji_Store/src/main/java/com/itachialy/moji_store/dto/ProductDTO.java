@@ -1,42 +1,48 @@
 package com.itachialy.moji_store.dto;
 
 import com.itachialy.moji_store.model.Category;
-import org.springframework.web.multipart.MultipartFile;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class ProductDTO {
-    private Long id;
-    private String name;
-    private String description;
-    private int price;
-    private MultipartFile image;
-    private Category category;
+    private Long idProduct;
+    @NotNull(message = "Tên sản phẩm không được để trống")
+    @Size(max = 255, message = "Tên sản phẩm không được vượt quá 255 ký tự")
+    private String nameProduct;
 
-    public ProductDTO(Long id, String name, String description, int price, MultipartFile image, Category category) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.image = image;
-        this.category = category;
-    }
+    @NotNull(message = "Mô tả không được để trống")
+    @Size(max = 500, message = "Mô tả không được vượt quá 500 ký tự")
+    private String description;
+
+    @Min(value = 1, message = "Giá sản phẩm phải lớn hơn 0")
+    private int price;
+
+    @NotNull(message = "Loại mô hình không được để trống")
+    private String modelType;
+
+    private String imageProduct;
+
+    @NotNull(message = "Danh mục không được để trống")
+    private Category category;
 
     public ProductDTO() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdProduct() {
+        return idProduct;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
     }
 
-    public String getName() {
-        return name;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
     }
 
     public String getDescription() {
@@ -55,12 +61,20 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public MultipartFile getImage() {
-        return image;
+    public String getModelType() {
+        return modelType;
     }
 
-    public void setImage(MultipartFile image) {
-        this.image = image;
+    public void setModelType(String modelType) {
+        this.modelType = modelType;
+    }
+
+    public String getImageProduct() {
+        return imageProduct;
+    }
+
+    public void setImageProduct(String imageProduct) {
+        this.imageProduct = imageProduct;
     }
 
     public Category getCategory() {

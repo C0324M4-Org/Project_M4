@@ -16,7 +16,6 @@ import java.util.Optional;
 public class CategoryServiceIpml implements ICategoryService {
     private final ICategoryRepository iCategoryRepository;
     private final IProductRepository iProductRepository;
-
     @Autowired
     public CategoryServiceIpml(ICategoryRepository iCategoryRepository, IProductRepository iProductRepository) {
         this.iCategoryRepository = iCategoryRepository;
@@ -44,7 +43,11 @@ public class CategoryServiceIpml implements ICategoryService {
 
 
     @Override
+<<<<<<< HEAD
     public void deleteCat(Long id) throws Exception {
+=======
+    public void deleteCategories(Long id) throws Exception {
+>>>>>>> 56bc2d601bfd90cbdaa0c42a3b3bdfe48f02f270
         if (iProductRepository.existsByCategoryId(id)) {
             throw new Exception("Không thể xóa mục này vì vẫn còn sản phẩm đang liên kết.");
         }
