@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
+<<<<<<< HEAD
     <file type="web" url="file://$PROJECT_DIR$/Project_M4-main/Moji_Store" />
+=======
+    <file type="web" url="file://$PROJECT_DIR$/C0324M4-main/spring_boot" />
+    <file type="web" url="file://$PROJECT_DIR$/C0324M4-main/ss_ck/demo" />
+>>>>>>> origin/tungtt-commit
   </component>
   <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />
