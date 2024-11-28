@@ -59,17 +59,17 @@
                     </div>
                     <div class="w-50 text-end">
                         <span style="font-size: 15px;" class="font-italic" th:text="'(' + ${count} + ' sản phẩm)'"></span> <br>
-                        <span class="text-danger me-1 font-weight-bold" th:text="${#numbers.formatInteger(totalPrice, 3, 'COMMA') + '₫'}"></span>
+                        <span class="text-danger me-1 font-weight-bold" th:text="${totalPrice==0?'0₫':#numbers.formatInteger(totalPrice, 3, 'COMMA') + '₫'}"></span>
                     </div>
                 </div>
                 <div class="w-100 mt-2 p-2 rounded-lg shadow-sm">
-                    <form th:action="@{/cart/payment}" method="post" class="w-100">
+                    <form th:action="@{/cart/payment}" method="post" class="w-100" th:object="${userInfo}">
                         <div class="w-100 p-0 text-center font-weight-bold uppercase py-1">
                             Thông tin người nhận
                         </div>
                         <div class="mt-2 w-100 d-flex flex-column">
                             <label class="ms-2 font-weight-bold" for="fullName">Tên người nhận</label>
-                            <input class="p-1" type="text" name="fullName" id="fullName" th:value="${user.fullName}" required placeholder="Nhập tên người nhận">
+                            <input class="p-1" type="text" name="fullName" id="fullName" th:field="*{fullName}" th:value="*{fullName}" required placeholder="Nhập tên người nhận">
                         </div>
                         <div class="mt-2 w-100 d-flex flex-column">
                             <label class="ms-2 font-weight-bold" for="email">Email</label>
@@ -77,12 +77,12 @@
                         </div>
                         <div class="mt-2 w-100 d-flex flex-column">
                             <label class="ms-2 font-weight-bold" for="phone">Số điện thoại<span class="text-danger font-italic">*</span></label>
-                            <input class="p-1" type="text" name="phone" id="phone" th:value="${user.phone}" placeholder="Nhập số điện thoại người nhận" required
+                            <input class="p-1" type="text" name="phone" id="phone" th:field="*{phone}" th:value="*{phone}" placeholder="Nhập số điện thoại người nhận" required
                             pattern="0[0-9]{9}">
                         </div>
                         <div class="mt-2 w-100 d-flex flex-column">
                             <label class="ms-2 font-weight-bold" for="address">Địa chỉ nhận<span class="text-danger font-italic">*</span></label>
-                            <input class="p-1" type="text" name="address" id="address" th:value="${user.address}" placeholder="Nhập địa chỉ nhận hàng" required>
+                            <input class="p-1" type="text" name="address" id="address" th:field="*{address}" th:value="*{address}" placeholder="Nhập địa chỉ nhận hàng" required>
                         </div>
                         <div class="mt-2 w-100 d-flex flex-column">
                             <label class="ms-2 font-weight-bold" for="note">Ghi chú:</label>

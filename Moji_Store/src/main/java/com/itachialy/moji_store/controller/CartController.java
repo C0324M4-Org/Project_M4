@@ -1,6 +1,7 @@
 package com.itachialy.moji_store.controller;
 
 
+import com.itachialy.moji_store.dto.CartUserInfoDTO;
 import com.itachialy.moji_store.model.*;
 import com.itachialy.moji_store.repository.ICartItemRepository;
 import com.itachialy.moji_store.service.IBillService;
@@ -12,10 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,6 +49,7 @@ public class CartController {
     @GetMapping
     public String index(Model model){
         Cart cart = cartService.findCartByAccount(getCurrentUser());
+        model.addAttribute("userInfo", new CartUserInfoDTO(getCurrentUser()));
         model.addAttribute("cart", cartService.findCartByAccount(this.getCurrentUser()));
         model.addAttribute("cartList", cartService.getCart(cart));
         model.addAttribute("user", this.getCurrentUser());
@@ -108,15 +107,16 @@ public class CartController {
     }
 
     @PostMapping("/payment")
-    public String payment(@RequestParam String note, Model model) {
+    public String payment(@ModelAttribute("userInfo") CartUserInfoDTO userInfo, @RequestParam String note, Model model) {
         List<CartItem> cartItems = cartService.getCart(cartService.findCartByAccount(this.getCurrentUser()));
         Bill newBill = new Bill();
         int totalBill = 0;
 
         newBill.setAccount(this.getCurrentUser());
-        newBill.setNote(note);
+
         List<BillItem> list = new ArrayList<>();
         billService.saveBill(newBill);
+
         for (CartItem cartItem : cartItems) {
 //            Bill item moi da den
             BillItem newBillItem = new BillItem();
@@ -129,8 +129,13 @@ public class CartController {
             billService.saveBillItem(newBillItem);
             list.add(newBillItem);
         }
+        newBill.setNote(note);
+        newBill.setName(userInfo.getFullName());
+        newBill.setPhone(userInfo.getPhone());
+        newBill.setAddress(userInfo.getAddress());
         newBill.setTotalBill(totalBill);
         newBill.setBillItems(list);
+
         billService.saveBill(newBill);
         cartService.clearCart(cartItems.get(0).getCart());
 
