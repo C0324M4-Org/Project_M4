@@ -10,24 +10,23 @@ import java.util.List;
 
 @Service
 public class AccountManageService implements IAccountManageService {
-    @Autowired
     IAccountManageRepository accountManageRepository;
-
+    @Autowired
+    public AccountManageService(IAccountManageRepository accountManageRepository) {
+        this.accountManageRepository = accountManageRepository;
+    }
     @Override
     public List<Account> findAll() {
         return accountManageRepository.findAll();
     }
-
     @Override
     public List<Account> findByRoleName(String roleName) {
         return accountManageRepository.findByRoleName(roleName);
     }
-
     @Override
     public void deactive(Long id) {
         accountManageRepository.deactive(id);
     }
-
     @Override
     public Account findById(Long id) {
         return accountManageRepository.findById(id);

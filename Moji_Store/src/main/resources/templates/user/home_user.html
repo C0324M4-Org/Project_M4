@@ -26,17 +26,17 @@
         <div class="container">
             <div class="row align-center">
                 <div class="head-col-left col-lg-3 col-12">
-                    <a href="/" class="logo">
+                    <a th:href="@{/}" class="logo">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH0Oa__wY2oVzrLcdA0z-BVW0FTpp9ZU5-mw&s" alt="Logo">
                     </a>
                 </div>
                 <div class="head-col-center col-lg-6 d-none d-lg-block">
-                    <form class="form-search" action="/search" method="get">
+                    <form class="form-search" th:action="@{/search}" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm">
+                            <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm hoặc loại mô hình" />
                             <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-blue"><b class="bi-search"></b></button>
-                                    </span>
+                                <button type="submit" class="btn btn-blue"><b class="bi-search"></b></button>
+                            </span>
                         </div>
                     </form>
                     <div class="research d-lg-block">
@@ -77,51 +77,58 @@
 <main class="mains blk-pro-cat sty-none">
     <div class="container">
         <div class="row">
-
             <div class="col-lg-3 col-12 js-fil-bar">
                 <div class="filter-groups">
-                <!--thanh silder search giá-->
-                    <div th:replace="~{fragments/slider-price :: priceSlider}"></div>
+                    <div class="filter-title">
+                        <h5 style="color: #8689d5;">VIDEO</h5>
+                    </div>
+                    <iframe width="250" height="200" src="https://www.youtube.com/embed/bAsHnzRtc6U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
             <div class="col-lg-9 col-12">
 
                 <div class="d-pro-head">
                     <h5 style="color:#5d79b5">Tìm kiếm: </h5>
-                    <select onchange="window.location.href = this.value" class="form-control d-none d-xl-block">
-                        <option value="/search?q=&show=">Mới nhất</option>
-                        <option value="/search?q=&show=priceAsc">Giá tăng dần</option>
-                        <option value="/search?q=&show=priceDesc">Giá giảm dần</option>
-                        <option value="/search?q=&show=discount">Sale</option>
-                    </select>
+                    <form action="/" method="get">
+                        <select onchange="this.form.submit()" class="form-control d-none d-xl-block" name="show">
+                            <option value="" th:selected="${show == ''}">Mới nhất</option>
+                            <option value="priceAsc" th:selected="${show == 'priceAsc'}">Giá tăng dần</option>
+                            <option  value="priceDesc" th:selected="${show == 'priceDesc'}">Giá giảm dần</option>
+                            <option disabled value="discount" th:selected="${show == 'discount'}">Sale</option>
+                        </select>
+                    </form>
                 </div>
 
-                <div class="product-list
-                row">
+                <div th:if="${message}" class="alert alert-warning" role="alert">
+                    <p th:text="${message}"></p>
+                </div>
+
+                <div class="product-list row">
                     <div th:each="product : ${list}" class="product-item col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
                         <div class="image">
                             <span class="flag">New</span>
-                            <a th:href="@{/}" title="image">
-                                <img data-sizes="auto" class="lazyload" th:src="${product.image}" alt="image">
+                            <a th:href="@{/product/{idProduct}(idProduct=${product.idProduct})}" title="image">
+                                <img class="lazyload" th:src="${product.imageProduct}" alt="image" />
                             </a>
                             <div class="product-action d-flex align-items-center justify-content-center">
                                 <a href="/" class="wish" data-psId="37922850">
                                     <i class="fas fa-heart"></i>
                                 </a>
-                                <a th:href="@{/}" class="js-add-cart" data-psId="37922850" data-root="-2">
+                                <a th:href="@{#}" class="js-add-cart" data-psId="37922850">
                                     <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </div>
                         </div>
                         <h1 class="name">
-                            <a th:href="@{'/product/' + ${product.id}}" th:text="${product.name}"></a>
+                            <a th:href="@{/product/{idProduct}(idProduct=${product.idProduct})}" th:text="${product.nameProduct}"></a>
                         </h1>
                         <div class="product-price">
                             <span class="price" th:text="${product.price} + ' đ'"></span>
                         </div>
                     </div>
                 </div>
-                <div class="d-block text-center mt-3">
+
+                <div class="d-block text-center mt-3" th:if="${list.totalElements > 8}">
                     <button id="loadMore" class="btn btn-primary"
                             th:attr="data-current-page=${currentPage}, data-total-pages=${totalPages}">
                         Xem Thêm
@@ -137,7 +144,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 <script src="/js/loading-product.js"></script>
-<script src="/js/slider-price.js"></script>
 
 </body>
 </html>

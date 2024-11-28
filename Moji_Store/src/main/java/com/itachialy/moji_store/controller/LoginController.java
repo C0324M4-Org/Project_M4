@@ -52,22 +52,18 @@ public class LoginController {
     @PostMapping("register")
     public String addNewAccount(@Valid @ModelAttribute("registerDTO") RegisterDTO registerDTO,
                                 BindingResult bindingResult, Model model) {
-
         if (bindingResult.hasErrors()) {
             model.addAttribute("registerDTO", registerDTO);
             return "security/register";
         }
-
         if (!registerDTO.isPasswordMatch()) {
             model.addAttribute("passwordError", "Mật khẩu và xác nhận mật khẩu không khớp");
             return "security/register";
         }
-
         if (accountService.existsByEmail(registerDTO.getEmail())) {
             model.addAttribute("emailError", "Email đã tồn tại");
             return "security/register";
         }
-
         if (accountService.existsByUsername(registerDTO.getUsername())) {
             model.addAttribute("usernameError", "Tên người dùng đã tồn tại");
             return "security/register";
@@ -76,11 +72,8 @@ public class LoginController {
         Account account = new Account();
         BeanUtils.copyProperties(registerDTO, account);
         accountService.save(account);
-
         return "redirect:/login";
     }
-
-
 
     @GetMapping("/error404")
     public String handleError() {
