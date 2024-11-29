@@ -1,10 +1,5 @@
 package com.itachialy.moji_store.controller;
 
-
-<<<<<<< HEAD
-=======
-import com.itachialy.moji_store.model.Account;
->>>>>>> 56bc2d601bfd90cbdaa0c42a3b3bdfe48f02f270
 import com.itachialy.moji_store.model.Role;
 import com.itachialy.moji_store.service.IAccountManageService;
 import com.itachialy.moji_store.service.IRoleService;

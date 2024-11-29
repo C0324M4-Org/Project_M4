@@ -13,10 +13,7 @@ public interface ICategoryService {
     List<Category> findAll();
     Optional<Category> findById(Long id);
     void saveCat(Category category);
-<<<<<<< HEAD
-    void deleteCat(Long id) throws Exception;
-=======
+
     void deleteCategories(Long id) throws Exception;
->>>>>>> 56bc2d601bfd90cbdaa0c42a3b3bdfe48f02f270
 
 }
