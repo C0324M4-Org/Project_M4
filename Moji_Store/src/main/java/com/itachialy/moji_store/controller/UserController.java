@@ -1,6 +1,10 @@
 package com.itachialy.moji_store.controller;
 
 import com.itachialy.moji_store.model.Account;
+<<<<<<< HEAD
+import com.itachialy.moji_store.service.IAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+=======
 import com.itachialy.moji_store.model.Product;
 import com.itachialy.moji_store.service.IAccountService;
 import com.itachialy.moji_store.service.IProductService;
@@ -9,10 +13,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+>>>>>>> 56bc2d601bfd90cbdaa0c42a3b3bdfe48f02f270
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< HEAD
+
+@Controller
+public class UserController {
+    @Autowired
+    private IAccountService accountService;  // Dịch vụ để lấy thông tin người dùng
+=======
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,12 +105,21 @@ public class UserController {
 
         return "/user/home_user";
     }
+>>>>>>> 56bc2d601bfd90cbdaa0c42a3b3bdfe48f02f270
 
     @GetMapping("/profile")
     public String viewProfile(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+<<<<<<< HEAD
+
+        Account account = accountService.findByUsername(username);
+
+        model.addAttribute("account", account);
+
+=======
         Account account = accountService.findByUsername(username);
         model.addAttribute("account", account);
+>>>>>>> 56bc2d601bfd90cbdaa0c42a3b3bdfe48f02f270
         return "user/profile";
     }
 }
