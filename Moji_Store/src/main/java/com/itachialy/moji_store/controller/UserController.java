@@ -86,7 +86,6 @@ public class UserController {
         if (productPage.isEmpty()) {
             model.addAttribute("message", "Không tìm thấy nội dung bạn yêu cầu.");
         }
-
         model.addAttribute("list", productPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());

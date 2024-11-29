@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm Sản Phẩm</title>
     <link href="https://img.pikbest.com/png-images/20240501/spirited-mothers-day-holiday-wishes-222024-png-images-png_10542277.png!w700wp" rel="icon" type="image/png">
-    <!-- Link Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Thêm Sản Phẩm</title>
@@ -17,32 +16,27 @@
     <div class="alert alert-danger" th:if="${message}">
         <span th:text="${message}"></span>
     </div>
-
     <form th:action="@{/admin/create}" method="post" th:object="${products}" enctype="multipart/form-data" class="mt-4">
         <div class="mb-3">
             <label for="name" class="form-label">Tên Sản Phẩm</label>
             <input type="text" id="name" th:field="*{nameProduct}" class="form-control" placeholder="Nhập tên sản phẩm" >
             <span th:if="${#fields.hasErrors('nameProduct')}" th:errors="*{nameProduct}" class="text-danger"></span>
         </div>
-
         <div class="mb-3">
             <label for="description" class="form-label">Mô Tả</label>
             <input id="description" th:field="*{description}" class="form-control" placeholder="Nhập mô tả sản phẩm" >
             <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></span>
         </div>
-
         <div class="mb-3">
             <label for="price" class="form-label">Giá</label>
             <input type="number" id="price" th:field="*{price}" class="form-control" placeholder="Nhập giá sản phẩm" >
             <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></span>
         </div>
-
         <div class="mb-3">
             <label for="mainImage" class="form-label">Hình ảnh:</label>
             <input type="file" class="form-control" multiple accept="image/*" id="mainImage" name="ImageProducts"  placeholder="hinh anh">
                 <span th:if="${#fields.hasErrors('imageProduct')}" th:errors="*{imageProduct}"></span>
         </div>
-
         <div class="mb-3">
             <label for="modelType" class="form-label">Loại mô hình</label>
                 <select  id="modelType" name="modelType" class="form-select" >
@@ -57,7 +51,6 @@
                 </select>
             <span th:if="${#fields.hasErrors('modelType')}" th:errors="*{modelType}" class="text-danger"></span>
         </div>
-
         <div class="mb-3">
             <label for="category" class="form-label">Danh Mục</label>
             <select id="category" th:field="*{category}" class="form-select" >
@@ -66,13 +59,11 @@
             </select>
             <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="text-danger"></span>
         </div>
-
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Thêm Sản Phẩm</button>
         </div>
     </form>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

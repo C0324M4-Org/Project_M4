@@ -1,6 +1,6 @@
 document.getElementById('eyeToggle').addEventListener('click', function () {
-    var passwordField = document.getElementById('password');
-    var icon = this.querySelector('i');
+    let passwordField = document.getElementById('password');
+    let icon = this.querySelector('i');
     if (passwordField.type === 'password') {
         passwordField.type = 'text';
         icon.classList.remove('bi-eye');
@@ -13,8 +13,8 @@ document.getElementById('eyeToggle').addEventListener('click', function () {
 });
 
 document.getElementById('eyeToggleConfirm').addEventListener('click', function () {
-    var confirmPasswordField = document.getElementById('confirmPassword');
-    var icon = this.querySelector('i');
+    let confirmPasswordField = document.getElementById('confirmPassword');
+    let icon = this.querySelector('i');
     if (confirmPasswordField.type === 'password') {
         confirmPasswordField.type = 'text';
         icon.classList.remove('bi-eye');

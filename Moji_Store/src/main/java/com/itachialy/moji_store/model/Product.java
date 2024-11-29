@@ -9,7 +9,6 @@ public class Product {
     private String nameProduct;
     private String description;
     private int price;
-
     private String modelType;
     private String imageProduct;
     @ManyToOne(fetch = FetchType.EAGER)
