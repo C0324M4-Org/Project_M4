@@ -19,6 +19,16 @@ public class BillServiceImpl implements IBillService {
     IBillItemRepository billItemRepository;
 
     @Override
+    public List<Bill> findAll() {
+        return billRepository.findAllOrderByDateDesc();
+    }
+
+    @Override
+    public Bill findById(Long id) {
+        return billRepository.findById(id).get();
+    }
+
+    @Override
     public List<BillItem> getBill(Bill bill) {
         return billItemRepository.getBillItemsByBill(bill);
     }

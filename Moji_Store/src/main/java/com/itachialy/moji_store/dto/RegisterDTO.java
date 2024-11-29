@@ -1,6 +1,10 @@
 package com.itachialy.moji_store.dto;
 import com.itachialy.moji_store.valid.ValidAge;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;

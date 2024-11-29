@@ -27,7 +27,7 @@ public class AccountController {
         List<Role> roles = roleService.findAll();
         model.addAttribute("roleName", "ALL");
         model.addAttribute("roles", roles);
-        return "account/index";
+        return "admin/account/index";
     }
 
     @GetMapping("/{roleName}")
@@ -41,13 +41,13 @@ public class AccountController {
         List<Role> roles = roleService.findAll();
         model.addAttribute("roleName", roleName);
         model.addAttribute("roles", roles);
-        return "account/index";
+        return "admin/account/index";
     }
 
     @GetMapping("/{id}/deactive")
     public String deactive(Long id, Model model) {
         model.addAttribute("account", accountService.findById(id));
-        return "account/deactive";
+        return "admin/account/deactive";
     }
 
     @PostMapping("/deactive")

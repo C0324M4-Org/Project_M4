@@ -79,7 +79,10 @@ public class CartController {
             if(cartService.findProductInListItems(cart, product) != null) {
                 cartItem.setQuantity(cartItem.getQuantity() + 1);
             }else{
-                cartItem = new CartItem(cart, product, 1);
+                cartItem = new CartItem();
+                cartItem.setQuantity(1);
+                cartItem.setCart(cart);
+                cartItem.setProduct(product);
             }
             cartService.addToCart(cart, cartItem);
             return "redirect:/cart";

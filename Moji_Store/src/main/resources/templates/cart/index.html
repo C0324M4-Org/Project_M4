@@ -32,34 +32,38 @@
                     <td class=" align-middle">
                         <div class="w-100 h-100 d-flex justify-content-center align-items-center">
                             <form th:action="@{/cart/decrease}" method="post">
-                                <input type="hidden" name="cartItemId" th:value="${item.id}" />
+                                <input type="hidden" name="cartItemId" th:value="${item.id}"/>
                                 <button type="submit" class="border-0 bg-transparent font-weight-bold">
                                     <i class="fa-solid fa-minus"></i>
                                 </button>
                             </form>
                             <span th:text="${item.quantity}" class="mx-2 font-weight-bold"></span>
                             <form th:action="@{/cart/increase}" method="post">
-                                <input type="hidden" name="cartItemId" th:value="${item.id}" />
+                                <input type="hidden" name="cartItemId" th:value="${item.id}"/>
                                 <button type="submit" class="border-0 bg-transparent font-weight-bold">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
                             </form>
                         </div>
                     </td>
-                    <td class=" align-middle text-center" th:text="${#numbers.formatInteger(item.product.price * item.quantity, 3, 'COMMA') + '₫'}"></td>
+                    <td class=" align-middle text-center"
+                        th:text="${#numbers.formatInteger(item.product.price * item.quantity, 3, 'COMMA') + '₫'}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="w-25 p-2">
             <div class="w-100">
-                <div class="w-100 p-2 rounded-lg shadow-sm d-flex justify-content-between align-items-center" style="font-size: 20px;">
+                <div class="w-100 p-2 rounded-lg shadow-sm d-flex justify-content-between align-items-center"
+                     style="font-size: 20px;">
                     <div class="w-50">
                         <span class="font-weight-bold">TỔNG CỘNG</span>
                     </div>
                     <div class="w-50 text-end">
-                        <span style="font-size: 15px;" class="font-italic" th:text="'(' + ${count} + ' sản phẩm)'"></span> <br>
-                        <span class="text-danger me-1 font-weight-bold" th:text="${totalPrice==0?'0₫':#numbers.formatInteger(totalPrice, 3, 'COMMA') + '₫'}"></span>
+                        <span style="font-size: 15px;" class="font-italic"
+                              th:text="'(' + ${count} + ' sản phẩm)'"></span> <br>
+                        <span class="text-danger me-1 font-weight-bold"
+                              th:text="${totalPrice==0?'0₫':#numbers.formatInteger(totalPrice, 3, 'COMMA') + '₫'}"></span>
                     </div>
                 </div>
                 <div class="w-100 mt-2 p-2 rounded-lg shadow-sm">
@@ -67,29 +71,49 @@
                         <div class="w-100 p-0 text-center font-weight-bold uppercase py-1">
                             Thông tin người nhận
                         </div>
-                        <div class="mt-2 w-100 d-flex flex-column">
-                            <label class="ms-2 font-weight-bold" for="fullName">Tên người nhận</label>
-                            <input class="p-1" type="text" name="fullName" id="fullName" th:field="*{fullName}" th:value="*{fullName}" required placeholder="Nhập tên người nhận">
+                        <div class="w-100 d-flex mt-2">
+                            <div class="w-50 d-flex flex-column me-1">
+                                <label class="ms-2 font-weight-bold" for="fullName">Tên người nhận</label>
+                                <input class="p-1" type="text" name="fullName" id="fullName" th:field="*{fullName}"
+                                       th:value="*{fullName}" required placeholder="Nhập tên người nhận">
+                            </div>
+                            <div class="w-50 d-flex flex-column ms-1">
+                                <label class="ms-2 font-weight-bold" for="email">Email</label>
+                                <input class="p-1" type="text" name="email" id="email" th:value="${user.email}"
+                                       disabled>
+                            </div>
                         </div>
                         <div class="mt-2 w-100 d-flex flex-column">
-                            <label class="ms-2 font-weight-bold" for="email">Email</label>
-                            <input class="p-1" type="text" name="email" id="email" th:value="${user.email}" readonly="readonly">
-                        </div>
-                        <div class="mt-2 w-100 d-flex flex-column">
-                            <label class="ms-2 font-weight-bold" for="phone">Số điện thoại<span class="text-danger font-italic">*</span></label>
-                            <input class="p-1" type="text" name="phone" id="phone" th:field="*{phone}" th:value="*{phone}" placeholder="Nhập số điện thoại người nhận" required
-                            pattern="0[0-9]{9}">
-                        </div>
-                        <div class="mt-2 w-100 d-flex flex-column">
-                            <label class="ms-2 font-weight-bold" for="address">Địa chỉ nhận<span class="text-danger font-italic">*</span></label>
-                            <input class="p-1" type="text" name="address" id="address" th:field="*{address}" th:value="*{address}" placeholder="Nhập địa chỉ nhận hàng" required>
+                            <label class="ms-2 font-weight-bold" for="phone">Số điện thoại<span
+                                    class="text-danger font-italic">*</span></label>
+                            <input class="p-1" type="text" name="phone" id="phone" th:field="*{phone}"
+                                   th:value="*{phone}" placeholder="Nhập số điện thoại người nhận" required
+                                   pattern="0[0-9]{9}">
                         </div>
                         <div class="mt-2 w-100 d-flex flex-column">
                             <label class="ms-2 font-weight-bold" for="note">Ghi chú:</label>
-                            <textarea class="p-1" rows="2" name="note" id="note" placeholder="Ghi chú cho đơn hàng (nếu có)" style="resize: none"></textarea>
+                            <textarea class="p-1" rows="2" name="note" id="note"
+                                      placeholder="Ghi chú cho đơn hàng (nếu có)" style="resize: none"></textarea>
+                        </div>
+                        <div class="mt-2 w-100 d-flex flex-column">
+                            <div class="w-100"><input type="radio" name="paymentMethod" id="store" value="0"><label for="store">Nhận và thanh toán tại cửa hàng</label></div>
+                            <div class="w-100">
+                                <input type="radio" name="paymentMethod" id="home" value="1">
+                                <label for="home">Thanh toán khi nhận hàng</label></div>
+                            <div class="w-100">
+                                <input type="radio" name="paymentMethod" id="vnpay" value="2">
+                                <label for="vnpay">Thanh toán qua ví <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-VNPAY-QR-1.png" width="15%"></label>
+                            </div>
+                        </div>
+                        <div class="mt-2 w-100 d-flex flex-column hidden">
+                            <label class="ms-2 font-weight-bold" for="address">Địa chỉ nhận<span
+                                    class="text-danger font-italic">*</span></label>
+                            <input class="p-1" type="text" name="address" id="address" th:field="*{address}"
+                                   th:value="*{address}" placeholder="Nhập địa chỉ nhận hàng" required>
                         </div>
                         <div class="mt-3 w-100 text-center">
-                            <input type="submit" th:disabled="${count == 0}" value="ĐẶT HÀNG" class="btn btn-primary w-100 py-2 font-weight-bold">
+                            <input type="submit" th:disabled="${count == 0}" value="ĐẶT HÀNG"
+                                   class="btn btn-primary w-100 py-2 font-weight-bold">
                             <br>
                             <span>hoặc <a th:href="@{/}">trở về mua sắm</a></span>
                         </div>

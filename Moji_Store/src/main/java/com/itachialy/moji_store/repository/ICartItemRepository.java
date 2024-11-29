@@ -2,7 +2,6 @@ package com.itachialy.moji_store.repository;
 
 import com.itachialy.moji_store.model.Cart;
 import com.itachialy.moji_store.model.CartItem;
-import com.itachialy.moji_store.model.Product;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -30,14 +30,16 @@
                 <div class="card-body">
                     <i class="fas fa-shopping-cart card-icon"></i>
                     <div>
-                        <h3>0</h3>
+                        <h3 th:text="${billCounter}"></h3>
                         <p>Đơn hàng</p>
                     </div>
                 </div>
-                <div class="card-footer">
-                    <span>Xem</span>
-                    <i class="fas fa-arrow-circle-right"></i>
-                </div>
+                <a th:href="@{/admin/bill}" class="card-link text-decoration-none">
+                    <div class="card-footer">
+                        <span>Xem</span>
+                        <i class="fas fa-arrow-circle-right"></i>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="col-md-3">
