@@ -40,8 +40,6 @@ public class CategoryServiceIpml implements ICategoryService {
     public void saveCat(Category category) {
         iCategoryRepository.save(category);
     }
-
-
     @Override
     public void deleteCategories(Long id) throws Exception {
         if (iProductRepository.existsByCategoryId(id)) {

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="tags">
+    <p>
+        <a th:href="@{/search/resin}">
+            <span>Mô hình RESIN</span>
+        </a>
+        <span></span>
+        <a th:href="@{/search/gundam}">
+            <span>Mô hình GUNDAM</span>
+        </a>
+        <span></span>
+        <a th:href="@{/search/pvc}">
+            <span>Mô hình PVC</span>
+        </a>
+        <span></span>
+        <a th:href="@{/search/nendroi}">
+            <span>Mô hình Nendoroid</span>
+        </a>
+    </p>
+</div>
+</body>
+</html>

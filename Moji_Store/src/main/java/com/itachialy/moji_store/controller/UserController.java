@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/")
 public class UserController {
@@ -86,7 +84,6 @@ public class UserController {
         if (productPage.isEmpty()) {
             model.addAttribute("message", "Không tìm thấy nội dung bạn yêu cầu.");
         }
-
         model.addAttribute("list", productPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
@@ -94,7 +91,6 @@ public class UserController {
 
         return "/user/home_user";
     }
-
     @GetMapping("/profile")
     public String viewProfile(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
