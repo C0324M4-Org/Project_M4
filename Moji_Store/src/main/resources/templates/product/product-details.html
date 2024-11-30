@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page: </title>
+    <link href="https://img.pikbest.com/png-images/20240501/spirited-mothers-day-holiday-wishes-222024-png-images-png_10542277.png!w700wp" rel="icon" type="image/png">
+    <link rel="stylesheet" href="https://web.nvnstatic.net/css/bootstrap/bootstrap.4.3.1.min.css?v=2" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/home-page.css" type="text/css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .product-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border: 2px solid rgb(78, 140, 175);
+        }
+
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+             font-family: Arial, sans-serif;
+         }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .product-info h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .thumbnail {
+            width: 60px;
+            height: auto;
+            margin: 5px;
+            /* cursor: pointer; */
+            border: 2px solid rgb(78, 140, 175);
+        }
+
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quantity button {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+        }
+
+        .quantity input {
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .add-to-cart, .buy-now {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .add-to-cart {
+            background-color: #9bb1e8;
+        }
+
+        .buy-now {
+            background-color: #7ba2cd;
+        }
+
+        .shipping-info {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .shipping-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+        }
+
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="header-top">
+        <div class="col text-right">
+            <p>
+                <span style="font-size:20px;">
+                    <a href="/he-thong-cua-hang">THÔNG TIN CỬA HÀNG</a>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="header-content top">
+        <div class="container">
+            <div class="row align-center">
+                <div class="head-col-left col-lg-3 col-12">
+                    <a href="/" class="logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH0Oa__wY2oVzrLcdA0z-BVW0FTpp9ZU5-mw&s" alt="Logo">
+                    </a>
+                </div>
+                <div class="head-col-center col-lg-6 d-none d-lg-block">
+                    <form class="form-search" th:action="@{/search}" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-blue"><b class="bi-search"></b></button>
+                            </span>
+                        </div>
+                    </form>
+                    <div class="research d-lg-block">
+
+                        <div th:replace="~{fragments/tags :: tags}"></div>
+                    </div>
+                </div>
+                <div class="head-col-right col-lg-3 col-12">
+                    <div sec:authorize="isAuthenticated()">
+                        <i class="bi bi-person-circle"></i>
+                        <span class="ms-2">Xin chào,
+                                <span sec:authentication="principal.username"></span></span>
+                        <a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
+                    </div>
+
+                    <div sec:authorize="!isAuthenticated()" class="header-right d-flex align-items-start">
+                        <ul class="header-user d-none d-md-block">
+                            <li>
+                                <a th:href="@{/login}">Đăng nhập | </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/register-form}">Đăng ký</a>
+                            </li>
+                        </ul>
+                        <div class="count-cart" title="Giỏ hàng" style="margin-left: 10px">
+                            <div class="count-cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="count d-flex align-items-center justify-content-center">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="mains blk-pro-cat sty-none">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img id="mainImage" th:src="${product.image}" alt="Product Image" class="product-image">
+                <div class="mt-2">
+                    <img id="mainImage1" th:src="${product.image}" alt="Product Image" class="thumbnail">
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mt-4">
+                    <h1 th:text="${product.name}"></h1>
+                    <p>Giá: <span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA')} + ' đ'"></span></p>
+                    <p>Mô tả: <span th:text="${product.description}"></span></p>
+                </div>
+
+                <div class="buttons">
+                    <button class="add-to-cart">THÊM VÀO GIỎ HÀNG</button>
+                    <button class="buy-now">MUA NGAY</button>
+                </div>
+
+                <div class="shipping-info">
+                    <div class="shipping-item">
+                        <span class="icon">🚚</span>
+                        <span>Giao hàng toàn quốc đơn hàng từ 99k</span>
+                    </div>
+                    <div class="shipping-item">
+                        <span class="icon">💰</span>
+                        <span>COD nội thành Đà Nẵng</span>
+                    </div>
+                    <div class="shipping-item">
+                        <span class="icon">↩️</span>
+                        <span>Đổi trả trong 24h</span>
+                    </div>
+                    <div class="shipping-item">
+                        <span class="icon">🚚</span>
+                        <span>Hỗ trợ ship 20k cho đơn hàng từ 400k</span>
+                    </div>
+                    <div class="shipping-item">
+                        <span class="icon">🚚</span>
+                        <span>Hỗ trợ ship 30k cho đơn hàng từ 600k</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="/js/loading-product.js"></script>
+<script src="/js/slider-price.js"></script>
+
+</body>
+</html>

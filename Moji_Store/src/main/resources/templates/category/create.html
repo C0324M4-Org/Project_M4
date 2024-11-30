@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Hãng Sản Phẩm</title>
+    <link href="https://img.pikbest.com/png-images/20240501/spirited-mothers-day-holiday-wishes-222024-png-images-png_10542277.png!w700wp" rel="icon" type="image/png">
+    <!-- Link Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center">Thêm Hãng Sản Phẩm</h2>
+
+    <div class="alert alert-danger" th:if="${message}">
+        <span th:text="${message}"></span>
+    </div>
+
+    <form th:action="@{/admin/category/add-category}" method="post" th:object="${categories}" class="mt-4">
+        <div class="mb-3">
+            <label for="name" class="form-label">Tên Hãng</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Nhập tên hãng" required>
+        </div>
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Thêm mới</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
