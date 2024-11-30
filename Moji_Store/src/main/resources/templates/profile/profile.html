@@ -55,13 +55,23 @@
                 </td>
             </tr>
             <tr th:if="${bills.size() > 0}" th:each="item : ${bills}">
-                <td class="text-center" th:text="${item.id}"></td>
-                <td class="text-center" th:text="${#temporals.format(item.created_at, 'dd/MM/yyyy HH:mm:ss')}"></td>
-                <td class="text-center font-weight-bold text-danger"
+                <td class="align-middle text-center" th:text="${item.id}"></td>
+                <td class="align-middle text-center" th:text="${#temporals.format(item.created_at, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                <td class="align-middle text-center font-weight-bold text-danger"
                     th:text="${#numbers.formatInteger(item.totalBill, 3, 'COMMA')} + '₫'">
                 </td>
-                <td class="text-center font-weight-bold text-primary" th:if="${item.status == 0}">Đang xử lý</td>
-                <td class="text-center font-weight-bold text-success" th:if="${item.status == 1}">Hoàn thành</td>
+                <td class="align-middle text-center font-weight-bold">
+                    <span class="text-primary" th:if="${item.status==0}">Chờ xử lý</span>
+                    <span class="text-success" th:if="${item.status==1}">Đã xác nhận</span>
+                    <span class="text-danger" th:if="${item.status==2}">Từ chối</span>
+                    <span class="text-primary" th:if="${item.status==3}">
+                        <form th:action="@{/status-done}" method="post" class="ms-1">
+                        <input type="hidden" name="id" th:value="${item.id}">
+                        <button type="submit" class="btn btn-success">Đã nhận hàng</button>
+                    </form>
+                    </span>
+                    <span class="text-success" th:if="${item.status==4}">Hoàn thành</span>
+                </td>
             </tr>
             </tbody>
         </table>

@@ -7,7 +7,29 @@
 <div th:insert="/fragments/layout::admin-header"></div>
 <div class="w-100 mt-5 d-flex justify-content-center">
     <div class="w-75 p-2 rounded-lg shadow-sm">
-        <h1 class="text-center uppercase">Chi tiết hóa đơn #<span th:text="${listItems[0].id}"></span></h1>
+        <h1 class="text-center uppercase">
+            Chi tiết hóa đơn #<span th:text="${listItems[0].id}"></span>
+            <div th:if="${listItems[0].bill.status == 0}" class="d-flex justify-content-center">
+                <form th:action="@{/admin/bill/change-status}" method="post" class="me-1">
+                    <input type="hidden" name="id" th:value="${bill.id}">
+                    <input type="hidden" name="status" th:value=1>
+                    <input type="hidden" name="url" th:value="'/admin/bill/' + ${bill.id}">
+                    <button type="submit" class="btn btn-success">Xác nhận</button>
+                </form>
+                <form th:action="@{/admin/bill/change-status}" method="post" class="ms-1">
+                    <input type="hidden" name="id" th:value="${bill.id}">
+                    <input type="hidden" name="status" th:value=2>
+                    <input type="hidden" name="url" th:value="'/admin/bill/' + ${bill.id}">
+                    <button type="submit" class="btn btn-danger">Từ chối</button>
+                </form>
+            </div>
+            <form th:if="${bill.status==1}" th:action="@{/admin/bill/change-status}" method="post" class="me-1">
+                <input type="hidden" name="id" th:value="${bill.id}">
+                <input type="hidden" name="status" th:value=3>
+                <input type="hidden" name="url" th:value="'/admin/bill/' + ${bill.id}">
+                <button type="submit" class="btn btn-primary">Giao hàng</button>
+            </form>
+        </h1>
         <div class="d-flex justify-content-center w-100 mt-5">
             <div class="w-75">
                 <div class="w-100 d-flex justify-content-center w-100 mt-3">
@@ -32,10 +54,12 @@
                         </tr>
                         <tr>
                             <td class="p-2 font-weight-bold">Trạng thái hiện tại:</td>
-                            <td class="p-2 text-end">
-                                <span class="font-weight-bold text-primary" th:if="${bill.status==0}">Chờ xử lý</span>
-                                <span class="font-weight-bold text-" th:if="${bill.status==1}">Đang giao</span>
-                                <span class="font-weight-bold text-success" th:if="${bill.status==2}">Hoàn thành</span>
+                            <td class="p-2 text-end font-weight-bold">
+                                <span class="text-primary" th:if="${bill.status==0}">Chờ xử lý</span>
+                                <span class="text-success" th:if="${bill.status==1}">Đã xác nhận</span>
+                                <span class="text-danger" th:if="${bill.status==2}">Từ chối</span>
+                                <span class="text-primary" th:if="${bill.status==3}">Đang giao</span>
+                                <span class="text-success" th:if="${bill.status==4}">Hoàn thành</span>
                             </td>
                         </tr>
                         <tr>

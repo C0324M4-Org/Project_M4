@@ -32,10 +32,10 @@ public class BillController {
     }
 
     @PostMapping("/change-status")
-    public String changeStatus(@RequestParam("id") Long id, @RequestParam("status") int status) {
+    public String changeStatus(@RequestParam("id") Long id, @RequestParam("status") int status, @RequestParam("url") String url) {
         Bill bill = billService.findById(id);
         bill.setStatus(status);
         billService.saveBill(bill);
-        return "redirect:/admin";
+        return "redirect:" + url;
     }
 }

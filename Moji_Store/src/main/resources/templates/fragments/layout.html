@@ -134,19 +134,23 @@
 </header>
 
 <div id="admin-header" class="w-100 d-flex justify-content-around" th:fragment="admin-header">
-    <div class="h-100 w-50">
+    <div class="h-100 w-25">
         <div class="h-100 w-50 d-flex justify-content-center align-items-center">
             <img src="/img/logo/images-removebg-preview.png" class="h-100" id="logo-img" onclick="window.location.href='/admin'" />
         </div>
-        <div class="w-50"></div>
     </div>
-    <div class="w-50 text-center d-flex justify-content-evenly align-items-center">
+    <div class="w-75 text-center d-flex justify-content-evenly align-items-center">
         <div class="header-link-items fw-bold">
             <i class="fas fa-user me-1"></i> Chào, <span class="ms-1" sec:authentication="principal.username"></span>
         </div>
         <div class="header-link-items header-link-items-hover">
             <a th:href="@{/admin/product}" class="text-dark">
                 <i class="fas fa-tags me-1"></i> SẢN PHẨM
+            </a>
+        </div>
+        <div class="header-link-items header-link-items-hover">
+            <a th:href="@{#}" class="text-dark">
+                <i class="fas fa-tags me-1"></i> LOẠI SẢN PHẨM
             </a>
         </div>
         <div class="header-link-items header-link-items-hover">

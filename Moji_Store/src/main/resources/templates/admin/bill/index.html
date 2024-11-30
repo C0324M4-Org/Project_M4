@@ -33,10 +33,12 @@
                 <td class="text-center" th:text="${#temporals.format(bill.created_at, 'dd/MM/yyyy HH:mm:ss')}"></td>
                 <td class="text-start" th:text="${bill.account.fullName}"></td>
                 <td class="text-end font-weight-bold" th:text="${#numbers.formatInteger(bill.totalBill, 3, 'COMMA')} + '₫'"></td>
-                <td class="text-center">
-                    <span class="font-weight-bold text-primary" th:if="${bill.status==0}">Chờ xử lý</span>
-                    <span class="font-weight-bold text-" th:if="${bill.status==1}">Đang giao</span>
-                    <span class="font-weight-bold text-success" th:if="${bill.status==2}">Hoàn thành</span>
+                <td class="text-center font-weight-bold">
+                    <span class="text-primary" th:if="${bill.status==0}">Chờ xử lý</span>
+                    <span class="text-success" th:if="${bill.status==1}">Đã xác nhận</span>
+                    <span class="text-danger" th:if="${bill.status==2}">Từ chối</span>
+                    <span class="text-primary" th:if="${bill.status==3}">Đang giao</span>
+                    <span class="text-success" th:if="${bill.status==4}">Hoàn thành</span>
                 </td>
                 <td class="text-center">
                     <a th:href="@{/admin/bill/{id}(id=${bill.id})}">Chi tiết</a>

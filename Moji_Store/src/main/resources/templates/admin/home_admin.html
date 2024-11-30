@@ -80,7 +80,7 @@
     <h2 class="mt-5">HÓA ĐƠN ĐANG CHỜ ĐỂ XỬ LÝ</h2>
     <div class="row mt-3">
         <div th:if="${pendingBills.size() == 0}" class="w-100 py-3 text-center uppercase text-success font-weight-bold py-3 border-top border-bottom">
-            <h5>
+            <h5 class="h-100 align-middle">
                 TẤT CẢ HÓA ĐƠN ĐỀU ĐÃ ĐƯỢC XỬ LÝ ✔
             </h5>
         </div>
@@ -98,27 +98,29 @@
             </thead>
             <tbody>
             <tr th:each="bill, index : ${pendingBills}">
-                <td class="text-center" th:text="${index.count}"></td>
-                <td class="text-center" th:text="${#temporals.format(bill.created_at, 'dd/MM/yyyy HH:mm:ss')}"></td>
-                <td class="" th:text="${bill.name}"></td>
+                <td class="align-middle text-center" th:text="${index.count}"></td>
+                <td class="align-middle text-center" th:text="${#temporals.format(bill.created_at, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                <td class="align-middle" th:text="${bill.name}"></td>
                 <td th:class="${bill.note.isEmpty()?'text-center':''}">
-                    <span th:if="${bill.note.isEmpty()}">Không có ghi chú</span>
-                    <span th:if="${!bill.note.isEmpty()}" th:text="${bill.note}"></span>
+                    <span class="align-middle h-100" th:if="${bill.note.isEmpty()}">Không có ghi chú</span>
+                    <span class="align-middle h-100" th:if="${!bill.note.isEmpty()}" th:text="${bill.note}"></span>
                 </td>
-                <td class="text-end" th:text="${#numbers.formatInteger(bill.totalBill, 3, 'COMMA')} + '₫'"></td>
-                <td class="d-flex justify-content-center">
+                <td class="align-middle text-end font-weight-bold" th:text="${#numbers.formatInteger(bill.totalBill, 3, 'COMMA')} + '₫'"></td>
+                <td class="align-middle d-flex justify-content-center">
                     <form th:action="@{/admin/bill/change-status}" method="post" class="me-1">
                         <input type="hidden" name="id" th:value="${bill.id}">
                         <input type="hidden" name="status" th:value=1>
+                        <input type="hidden" name="url" value="/admin">
                         <button type="submit" class="btn btn-success">Xác nhận</button>
                     </form>
                     <form th:action="@{/admin/bill/change-status}" method="post" class="ms-1">
                         <input type="hidden" name="id" th:value="${bill.id}">
                         <input type="hidden" name="status" th:value=2>
+                        <input type="hidden" name="url" value="/admin">
                         <button type="submit" class="btn btn-danger">Từ chối</button>
                     </form>
                 </td>
-                <td class="text-center">
+                <td class="align-middle text-center">
                     <a th:href="@{/admin/bill/{id}(id=${bill.id})}">Xem</a>
                 </td>
             </tr>
