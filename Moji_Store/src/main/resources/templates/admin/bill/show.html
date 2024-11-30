@@ -39,29 +39,36 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 font-weight-bold">Tổng cộng:</td>
-                            <td class="p-2 text-end font-weight-bold" th:text="${#numbers.formatInteger(bill.totalBill, 3, 'COMMA')} + '₫'"></td>
+                            <td class="p-2 font-weight-bold">Ghi chú:</td>
+                            <td class="p-2 text-end">
+                                <span class="font-italic" th:text="${bill.note.isEmpty()?'không có ghi chú':bill.note}"></span>
+                            </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="d-flex mt-5 w-100 justify-content-center">
+
+        <div class="d-flex w-100 justify-content-center">
             <table class="table table-bordered" style="width: 90%">
                 <thead>
                 <tr>
-                    <th class="w-25 text-center">STT</th>
-                    <th class="w-25 text-center">Tên sản phẩm</th>
-                    <th class="w-25 text-center">Số lượng</th>
-                    <th class="w-25 text-center">Thành tiền</th>
+                    <th style="width: 5%;" class="text-center">STT</th>
+                    <th style="width: 45%;" class="text-center">Tên sản phẩm</th>
+                    <th style="width: 20%;" class="text-center">Số lượng</th>
+                    <th style="width: 30%;" class="text-center">Thành tiền</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="i, index : ${listItems}">
                     <td class="text-center" th:text="${index.count}"></td>
-                    <td class="text-center">FUCKKKKK JAVAAAA</td>
-                    <td class="text-center">FUCKKKKK JAVAAAA</td>
-                    <td class="text-center">FUCKKKKK JAVAAAA</td>
+                    <td th:text="${i.product.name}"></td>
+                    <td class="text-center" th:text="${i.quantity}"></td>
+                    <td class="text-end font-weight-bold" th:text="${#numbers.formatInteger(i.product.price * i.quantity, 3, 'COMMA')} + '₫'"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="font-weight-bold text-center uppercase">TỔNG CỘNG</td>
+                    <td class="font-weight-bold text-end" th:text="${#numbers.formatInteger(bill.totalBill, 3, 'COMMA')} + '₫'"></td>
                 </tr>
                 </tbody>
             </table>

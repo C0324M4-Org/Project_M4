@@ -29,8 +29,14 @@ public class Bill {
     private String address;
     private String note = "";
 
-    private int status = 0;
-    //0 == PENDING, 1 == DONE
+    private int status;
+    /*
+    * 0 PENDING
+    * 1 APPROVED
+    * 2 REJECTED
+    * 3 SHIPPING
+    * 4 DONE
+    * */
 
     private LocalDateTime created_at = LocalDateTime.now();
     private LocalDateTime updated_at = LocalDateTime.now();

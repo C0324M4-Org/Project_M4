@@ -28,6 +28,8 @@ public class AdminControlller {
         model.addAttribute("list", iProductService.findAll());
         model.addAttribute("accountCounter", iAccountManageService.countAll());
         model.addAttribute("billCounter", iBillService.findAll().size());
+        model.addAttribute("productCounter", iProductService.findAll().size());
+        model.addAttribute("pendingBills", iBillService.getPendingBills());
         return "/admin/home_admin";
     }
 

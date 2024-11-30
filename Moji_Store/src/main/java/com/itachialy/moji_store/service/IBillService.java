@@ -10,12 +10,11 @@ import java.util.List;
 
 public interface IBillService {
     List<Bill> findAll();
-
     Bill findById(Long id);
-
     List<BillItem> getBill(Bill bill);
     void saveBill(Bill bill);
     void saveBillItem(BillItem billItem);
     Long countAllBill();
     List<Bill> getBillsByAccount(Account account);
+    List<Bill> getPendingBills();
 }

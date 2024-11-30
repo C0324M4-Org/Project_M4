@@ -52,4 +52,9 @@ public class BillServiceImpl implements IBillService {
     public List<Bill> getBillsByAccount(Account account){
         return billRepository.findBillsByAccount(account);
     }
+
+    @Override
+    public List<Bill> getPendingBills(){
+        return billRepository.getPendingBills();
+    }
 }

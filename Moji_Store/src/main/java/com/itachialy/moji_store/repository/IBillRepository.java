@@ -15,4 +15,7 @@ public interface IBillRepository extends JpaRepository<Bill, Long> {
     List<Bill> findBillsByAccount(Account account);
     @Query("select b from Bill b order by b.created_at desc")
     List<Bill> findAllOrderByDateDesc();
+
+    @Query("select b from Bill b where b.status = 0")
+    List<Bill> getPendingBills();
 }
