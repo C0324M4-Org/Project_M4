@@ -37,7 +37,7 @@ public class SpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/","/login","/register-form", "/register", "/css/**", "/js/**", "/img/**").permitAll()  // Đảm bảo các đường dẫn này có thể truy cập mà không cần đăng nhập
+                        .requestMatchers("/","/login","/register-form", "/register", "/css/**", "/js/**", "/img/**", "/images/**").permitAll()  // Đảm bảo các đường dẫn này có thể truy cập mà không cần đăng nhập
                         .requestMatchers("/admin/**").hasRole("ADMIN")  // Yêu cầu role ADMIN
                         .requestMatchers("/user/**").hasRole("USER")  // Yêu cầu Role USER
                         .anyRequest().authenticated()  // Các yêu cầu còn lại phải được xác thực
@@ -54,6 +54,7 @@ public class SpringSecurity {
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login?logout=true")
+
                         .deleteCookies("JSESSIONID")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)

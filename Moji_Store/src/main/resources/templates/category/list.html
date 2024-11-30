@@ -21,7 +21,7 @@
 
 </head>
 <body>
-<div th:insert="/fragments/layout::header"></div>
+<div th:insert="/fragments/layout::admin-header"></div>
 <div class="container-fluid d-flex justify-content-center position-relative">
 
 
@@ -71,14 +71,6 @@
                 <td class="p-2 text-center">
 
                     <a th:href="@{/admin/category/show-edit/{id}(id=${category.id})}" class="btn btn-warning">Sửa</a>
-<!--                    <form th:action="@{/admin/category/delete-cat/{id}(id=${category.id})}" method="post"-->
-<!--                          style="display: inline;">-->
-<!--                        <input type="hidden" name="id" th:value="${category.id}">-->
-<!--                        <button type="submit" class="btn btn-danger"-->
-<!--                                th:data="|Bạn có muốn xóa loại sản phẩm ${category.name}|"-->
-<!--                                onclick="return confirm(this.getAttribute('data'));">Xóa-->
-<!--                        </button>-->
-<!--                    </form>-->
                     <form th:action="@{/admin/category/delete/{id}(id=${category.id})}" method="get" style="display: inline;">
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
                                 th:data-id="${category.id}" th:data-name="${category.name}">Xóa

@@ -1,10 +1,10 @@
 package com.itachialy.moji_store.dto;
 import com.itachialy.moji_store.valid.ValidAge;
 import jakarta.validation.constraints.*;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
-
+@Data
 public class RegisterDTO {
     @NotNull(message = "*Không được để trống tên đăng nhập")
     @Size(min = 5, message = "*Tên đăng nhập phải có ít nhất 5 ký tự")
@@ -36,76 +36,6 @@ public class RegisterDTO {
     @Past(message = "*Ngày sinh không được quá ngày hiện tại")
     @ValidAge
     private LocalDate dob;
-
-    public RegisterDTO(String username, String fullName,String gender, String email,
-                       String password, String confirmPassword, LocalDate dob) {
-        this.username = username;
-        this.fullName = fullName;
-        this.gender = gender;
-        this.email = email;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.dob = dob;
-    }
-
-    public RegisterDTO() {
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
 
     public boolean isPasswordMatch() {
         return this.password.equals(this.confirmPassword);

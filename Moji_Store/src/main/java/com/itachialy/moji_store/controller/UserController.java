@@ -28,7 +28,7 @@ public class UserController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public String showList(@RequestParam(defaultValue = "0") int page,
                            @RequestParam(defaultValue = "") String show,
                            Model model) {
@@ -91,11 +91,5 @@ public class UserController {
 
         return "/user/home_user";
     }
-    @GetMapping("/profile")
-    public String viewProfile(Model model) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Account account = accountService.findByUsername(username);
-        model.addAttribute("account", account);
-        return "user/profile";
-    }
+
 }

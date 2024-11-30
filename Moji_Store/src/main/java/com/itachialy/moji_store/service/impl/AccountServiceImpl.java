@@ -46,6 +46,7 @@ public class AccountServiceImpl implements IAccountService {
     public boolean existsByUsername(String username) {
         return iAccountRepository.existsByUsername(username);
     }
+
     @Override
     public Account findUserByEmail(String email) {
         return iAccountRepository.findByEmail(email);
@@ -55,5 +56,20 @@ public class AccountServiceImpl implements IAccountService {
         return iAccountRepository.findByUsername(username);
     }
 
+
+    @Override
+    public Account findByUsernameOrEmail(String username, String email) {
+        return iAccountRepository.findByUsernameAndEmail(username, email);
+    }
+
+    @Override
+    public Account findByUsernameOrEmail(String usernameOrEmail) {
+        if(usernameOrEmail.contains("@")){
+            return findUserByEmail(usernameOrEmail);
+        }
+        else{
+            return findByUsername(usernameOrEmail);
+        }
+    }
 }
 

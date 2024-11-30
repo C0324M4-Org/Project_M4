@@ -1,11 +1,14 @@
 package com.itachialy.moji_store.dto;
 
 import com.itachialy.moji_store.model.Category;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
+import jakarta.validation.constraints.*;
+import lombok.*;
+@NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
 public class ProductDTO {
+
     private Long idProduct;
     @NotNull(message = "Tên sản phẩm không được để trống")
     @Size(max = 255, message = "Tên sản phẩm không được vượt quá 255 ký tự")
@@ -26,62 +29,4 @@ public class ProductDTO {
     @NotNull(message = "Danh mục không được để trống")
     private Category category;
 
-    public ProductDTO() {
-    }
-
-    public Long getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(Long idProduct) {
-        this.idProduct = idProduct;
-    }
-
-    public String getNameProduct() {
-        return nameProduct;
-    }
-
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getModelType() {
-        return modelType;
-    }
-
-    public void setModelType(String modelType) {
-        this.modelType = modelType;
-    }
-
-    public String getImageProduct() {
-        return imageProduct;
-    }
-
-    public void setImageProduct(String imageProduct) {
-        this.imageProduct = imageProduct;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 }

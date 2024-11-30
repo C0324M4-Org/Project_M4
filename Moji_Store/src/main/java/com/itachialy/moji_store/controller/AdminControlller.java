@@ -1,10 +1,9 @@
 package com.itachialy.moji_store.controller;
-
 import com.itachialy.moji_store.dto.ProductDTO;
-import com.itachialy.moji_store.model.Account;
 import com.itachialy.moji_store.model.Product;
 import com.itachialy.moji_store.service.IAccountManageService;
 import com.itachialy.moji_store.service.ICategoryService;
+import com.itachialy.moji_store.service.IBillService;
 import com.itachialy.moji_store.service.IProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -23,8 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,21 +30,27 @@ import java.util.UUID;
 public class AdminControlller {
     private final IProductService iProductService;
     private final ICategoryService iCategoryService;
+
     private final IAccountManageService iAccountManageService;
+    private final IBillService iBillService;
+
     @Autowired
-    public AdminControlller(IProductService iProductService, ICategoryService iCategoryService, IAccountManageService iAccountManageService) {
+    public AdminControlller(IProductService iProductService, ICategoryService iCategoryService, IAccountManageService iAccountManageService, IBillService iBillService) {
         this.iProductService = iProductService;
         this.iCategoryService = iCategoryService;
         this.iAccountManageService = iAccountManageService;
+        this.iBillService = iBillService;
     }
 
+
+
     @GetMapping("")
-    public String showControlPanel(Model model) {
-        List<Product> productList = iProductService.findAll();
-        List<Account> accountList = iAccountManageService.findAll();
-        model.addAttribute("list", productList);
-        model.addAttribute("productCount", productList.size());
-        model.addAttribute("accountCount", accountList.size());
+    public String showControlPanel(Model model){
+        model.addAttribute("list", iProductService.findAll());
+        model.addAttribute("accountCounter", iAccountManageService.countAll());
+        model.addAttribute("billCounter", iBillService.findAll().size());
+        model.addAttribute("productCounter", iProductService.findAll().size());
+        model.addAttribute("pendingBills", iBillService.getPendingBills());
         return "/admin/home_admin";
     }
 

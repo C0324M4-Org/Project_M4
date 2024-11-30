@@ -31,4 +31,9 @@ public class AccountManageService implements IAccountManageService {
     public Account findById(Long id) {
         return accountManageRepository.findById(id);
     }
+
+    @Override
+    public int countAll() {
+        return accountManageRepository.countAll();
+    }
 }

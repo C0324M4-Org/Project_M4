@@ -31,17 +31,14 @@
     left: 15px;
 
 }
+.product-action .fa-heart, .fa-shopping-cart {
+    color: white;
+}
+.product-action button:hover .fa-heart,
+.product-action button:hover .fa-shopping-cart {
+    color: #ff6887; /* Màu sáng hơn khi hover */
+}
 
-.product-action .wish i,
-.product-action .js-add-cart i {
-    font-size: 20px;
-    color: gray;
-}
-.product-action .wish i.active,
-.product-action .js-add-cart i.active {
-    color: rgb(85, 120, 145);
-    font-weight: bold;
-}
 .btn-blue{
     background-color:#aededc;
 }
@@ -201,8 +198,7 @@
 }
 
 .product-action .js-add-cart{
-    margin-left: 18px;
-    margin-top: 10px;
+    margin-left: 15px;
     width: 23px;
     height: 29px;
 }

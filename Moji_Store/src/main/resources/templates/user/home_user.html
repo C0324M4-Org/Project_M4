@@ -111,12 +111,19 @@
                                 <img class="lazyload" th:src="${product.imageProduct}" alt="image" />
                             </a>
                             <div class="product-action d-flex align-items-center justify-content-center">
-                                <a href="/" class="wish" data-psId="37922850">
-                                    <i class="fas fa-heart"></i>
-                                </a>
-                                <a th:href="@{#}" class="js-add-cart" data-psId="37922850">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </a>
+                                <form method="post">
+                                    <input type="hidden" name="productId" th:value="${product.idProduct}">
+                                    <button type="submit" class="border-0 bg-transparent">
+                                        <i class="fas fa-heart"></i>
+                                    </button>
+                                </form>
+                                <div class="mx-3"></div>
+                                <form th:action="@{/cart/add}" method="post">
+                                    <input type="hidden" name="productId" th:value="${product.idProduct}">
+                                    <button type="submit" class="border-0 bg-transparent">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         <h1 class="name">

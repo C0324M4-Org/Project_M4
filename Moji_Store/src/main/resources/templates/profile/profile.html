@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/layout::head">
+    <meta charset="UTF-8">
+    <title>Trang cá nhân</title>
+</head>
+<body>
+<div th:insert="fragments/layout::header"></div>
+<div class="w-100 d-flex p-2 mt-3">
+    <div style="width: 30%">
+        <div class="w-100 text-center font-weight-bold">
+            <div class="w-100 d-flex justify-content-center">
+                <img src="/img/Hinh-anh-dai-dien-mac-dinh-Facebook.jpg" style="width: 50%" class="rounded-circle"></img>
+            </div>
+            <span th:text="${user.fullName}" style="font-size: 40px"></span> <br>
+            <span th:text="'@' + ${user.username}" class="font-italic font-weight-normal"></span>
+        </div>
+        <div class="w-100 text-center mt-3">
+            <h3>Thông tin của bạn <i class="fa-solid fa-pen-to-square text-warning" style="font-size: smaller;"></i></h3>
+        </div>
+        <div class="w-100 d-flex justify-content-center w-100 mt-3">
+            <table class="w-75 rounded-lg shadow-sm">
+                <tr>
+                    <td class="p-2 font-weight-bold">Email</td>
+                    <td class="p-2 text-end" th:text="${user.email}"></td>
+                </tr>
+                <tr>
+                    <td class="p-2 font-weight-bold">Số điện thoại</td>
+                    <td class="p-2 text-end" th:text="${user.phone==null?'Chưa có thông tin':user.phone}"></td>
+                </tr>
+                <tr>
+                    <td class="p-2 font-weight-bold">Địa chỉ</td>
+                    <td class="p-2 text-end" th:text="${user.address==null?'Chưa có thông tin':user.address}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="width: 70%">
+        <div class="w-100">
+            <h3>Lịch sử mua hàng của bạn</h3>
+        </div>
+        <table class="w-100 table table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">Số HD</th>
+                <th class="text-center">Ngày giao dịch</th>
+                <th class="text-center">Thành tiền</th>
+                <th class="text-center">Trạng thái</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${bills.size() == 0}">
+                <td colspan="4" class="text-center uppercase text-secondary font-weight-bold py-3">
+                    KHÔNG GHI NHẬN LỊCH SỬ MUA HÀNG CỦA BẠN :( <a th:href="@{/}">MUA SẮM Ở ĐÂY!</a>
+                </td>
+            </tr>
+            <tr th:if="${bills.size() > 0}" th:each="item : ${bills}">
+                <td class="align-middle text-center" th:text="${item.id}"></td>
+                <td class="align-middle text-center" th:text="${#temporals.format(item.created_at, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                <td class="align-middle text-center font-weight-bold text-danger"
+                    th:text="${#numbers.formatInteger(item.totalBill, 3, 'COMMA')} + '₫'">
+                </td>
+                <td class="align-middle text-center font-weight-bold">
+                    <span class="text-primary" th:if="${item.status==0}">Chờ xử lý</span>
+                    <span class="text-success" th:if="${item.status==1}">Đã xác nhận</span>
+                    <span class="text-danger" th:if="${item.status==2}">Từ chối</span>
+                    <span class="text-primary" th:if="${item.status==3}">
+                        <form th:action="@{/status-done}" method="post" class="ms-1">
+                        <input type="hidden" name="id" th:value="${item.id}">
+                        <button type="submit" class="btn btn-success">Đã nhận hàng</button>
+                    </form>
+                    </span>
+                    <span class="text-success" th:if="${item.status==4}">Hoàn thành</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
